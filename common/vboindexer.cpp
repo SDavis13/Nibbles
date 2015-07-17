@@ -61,7 +61,7 @@ void indexVBO_slow(
 
 		// Try to find a similar vertex in out_XXXX
 		unsigned short index;
-		bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i],     out_vertices, out_uvs, out_normals, index);
+		bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i], out_vertices, out_uvs, out_normals, index);
 
 		if ( found ){ // A similar vertex is already in the VBO, use it instead !
 			out_indices.push_back( index );
@@ -131,12 +131,6 @@ void indexVBO(
 		}
 	}
 }
-
-
-
-
-
-
 
 void indexVBO_TBN(
 	std::vector<glm::vec3> & in_vertices,
