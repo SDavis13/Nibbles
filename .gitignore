@@ -66,7 +66,7 @@ $RECYCLE.BIN/
 *.slo
 *.lo
 *.o
-*.obj
+#*.obj #this is also the extension for Wavefront .objs which we want
 
 # Precompiled Headers
 *.gch
