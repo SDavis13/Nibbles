@@ -38,8 +38,8 @@ include_directories(
 	external/glm-0.9.4.0/
 	external/glew-1.9.0/include/
 	external/assimp-3.0.1270/include/
-	external/box2d/
 	external/bullet-2.81-rev2613/src/
+	external/Box2D/Box2D
 	.
 )
 
@@ -59,20 +59,32 @@ add_definitions(
 
 # Tutorial 2
 add_executable(nibbles
-	nibbles/tutorial02.cpp
 	nibbles/globals.hpp
+	nibbles/globals.cpp
 	nibbles/utils.hpp
 	nibbles/utils.cpp
 	nibbles/main.cpp
-	nibbles/entity.hpp
-	nibbles/entity.cpp
+	nibbles/Entity.hpp
+	nibbles/Entity.cpp
+	nibbles/Part.hpp
+	nibbles/Part.cpp
+	nibbles/Mesh.hpp
+	nibbles/Mesh.cpp
+	nibbles/LightSource.hpp
+	nibbles/LightSource.cpp
 	common/shader.cpp
 	common/shader.hpp
 	common/texture.cpp
 	common/texture.hpp
+	common/objloader.hpp
+	common/objloader.cpp
+	common/vboindexer.hpp
+	common/vboindexer.cpp
+	common/controls.hpp
+	common/controls.cpp
 	
-	nibbles/FragmentShader.fragmentshader
-	nibbles/VertexShader.vertexshader
+	nibbles/StandardShading.fragmentshader
+	nibbles/StandardShading.vertexshader
 )
 target_link_libraries(nibbles
 	${ALL_LIBS}

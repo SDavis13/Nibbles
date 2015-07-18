@@ -6,7 +6,7 @@
 
 #include <glm/glm.hpp>
 
-#include <Box2d/Dynamics/b2Body.h>
+#include <Box2D/Dynamics/b2Body.h>
 
 class Part;
 

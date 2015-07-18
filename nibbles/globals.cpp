@@ -69,8 +69,9 @@ int initializeOGLstuff(){
 
     // Get a handle for our "LightPosition" uniform
     LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
-
-    universe = new b2World(b2Vec2(0,0));
+    
+    b2Vec2 uniGravity(0,0);
+    universe = new b2World(uniGravity);
 
     return 0;
 }
