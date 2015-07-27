@@ -3,6 +3,7 @@
 #define MESH_HPP
 
 #include <GL/glew.h>
+#include <Box2D/Collision/Shapes/b2PolygonShape.h>
 
 class Mesh
 {
@@ -14,6 +15,7 @@ public:
     bool valid;
     Mesh(const char * path);
     Mesh() : valid(false) {}
+    b2PolygonShape getHullWrap();
 };
 
 #endif

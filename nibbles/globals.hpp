@@ -30,6 +30,10 @@ using namespace glm;
 #define COMPILE_HERE extern
 #endif
 
+#define COUNTERCLOCKWISE 1
+#define COLINEAR 0
+#define CLOCKWISE -1
+
 COMPILE_HERE GLFWwindow* window;
 
 COMPILE_HERE b2World* universe;

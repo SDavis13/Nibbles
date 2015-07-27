@@ -39,7 +39,7 @@ include_directories(
 	external/glew-1.9.0/include/
 	external/assimp-3.0.1270/include/
 	external/bullet-2.81-rev2613/src/
-	external/Box2D/Box2D
+	external/Box2D/
 	.
 )
 

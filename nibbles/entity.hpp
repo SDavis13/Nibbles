@@ -9,8 +9,8 @@
 #include <Box2D/Dynamics/b2Body.h>
 
 class Part;
-
 class Entity
+
 {
 public:
     glm::vec3 position;
