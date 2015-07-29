@@ -6,6 +6,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
 
+#include <Box2D/Collision/Shapes/b2CircleShape.h>
+
 void Part::generateTransform(glm::mat4& transform) const{
     assert(valid);
 
@@ -44,29 +46,35 @@ void Part::render() const{
     render(generateTransform());
 }
 
-void Part::computeShapes(){
-    std::vector<b2Vec2> vertices = mesh.computeHullPoly();
-    if(!(scale.x == 0 && scale.z == 0)){
-        for(int i = 0; i < vertices.size(); ++i){
-            vertices[i].x *= scale.x;
-            vertices[i].y *= scale.z;
-        }
-    }
-
-    if(vertices.size() > 8){
-        std::size_t halfSize = vertices.size()/2;
-        std::vector<b2Vec2> out1(vertices.begin(), vertices.begin() + halfSize + 1);
-        std::vector<b2Vec2> out2(vertices.begin() + halfSize, vertices.end());
-        out2.push_back(vertices[0]);
-        b2PolygonShape* shape1 = new b2PolygonShape;
-        shape1->Set(&out1[0], out1.size());
-        b2PolygonShape* shape2 = new b2PolygonShape;
-        shape2->Set(&out1[0], out1.size());
-        shapes.push_back(shape1);
-        shapes.push_back(shape2);
-    }else{
-        b2PolygonShape* shape = new b2PolygonShape;
-        shape->Set(&vertices[0], vertices.size());
+void Part::computeShapes(bool circular, float offset){
+    if(circular){
+        b2CircleShape* shape = new b2CircleShape();
+        shape->m_radius = mesh.computeMaxRadius() + offset;
         shapes.push_back(shape);
+    }else{
+        std::vector<b2Vec2> vertices = mesh.computeHullPoly();
+        if(!(scale.x == 0 && scale.z == 0)){
+            for(int i = 0; i < vertices.size(); ++i){
+                vertices[i].x *= scale.x;
+                vertices[i].y *= scale.z;
+            }
+        }
+
+        if(vertices.size() > 8){
+            std::size_t halfSize = vertices.size()/2;
+            std::vector<b2Vec2> out1(vertices.begin(), vertices.begin() + halfSize + 1);
+            std::vector<b2Vec2> out2(vertices.begin() + halfSize, vertices.end());
+            out2.push_back(vertices[0]);
+            b2PolygonShape* shape1 = new b2PolygonShape;
+            shape1->Set(&out1[0], out1.size());
+            b2PolygonShape* shape2 = new b2PolygonShape;
+            shape2->Set(&out1[0], out1.size());
+            shapes.push_back(shape1);
+            shapes.push_back(shape2);
+        }else{
+            b2PolygonShape* shape = new b2PolygonShape;
+            shape->Set(&vertices[0], vertices.size());
+            shapes.push_back(shape);
+        }
     }
 }

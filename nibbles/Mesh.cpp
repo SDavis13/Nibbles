@@ -50,7 +50,7 @@ std::vector<b2Vec2> Mesh::computeHullPoly(){
         }
     }
 
-    //find furthest right vertex
+    //find furthest left vertex
     float farLeft = verticesIn[0].x;
     int farLeftIndex = 0;
     for(i = 1; i < verticesIn.size(); ++i){
@@ -87,4 +87,19 @@ std::vector<b2Vec2> Mesh::computeHullPoly(){
     }while(nextIdx != farLeftIndex);
 
     return verticesOut;
+}
+
+float Mesh::computeMaxRadius(){
+    float radius = 0;
+
+    //transfer vertices
+    for(unsigned int i = startindex; i < startindex + numvertices; ++i){
+        glm::vec3& vertex = indexed_vertices[i];
+        float curRad = sqrt(vertex.x*vertex.x+vertex.y*vertex.y);
+        if(curRad > radius){
+            radius = curRad;
+        }
+    }
+    
+    return radius;
 }

@@ -24,7 +24,8 @@ public:
     glm::vec3 scale;
     Mesh mesh;
     bool valid;
-    b2Fixture* fixture;
+    b2Body* body;
+    std::vector<b2Fixture*> fixtures;
     std::vector<b2Shape*> shapes;
     Part(Entity& source, Mesh& mesh, glm::vec3 relPosition = glm::vec3(0), glm::vec3 relRotAxis = glm::vec3(0,1,0), 
             float relAngle = 0, glm::vec3 relScale = glm::vec3(1)) : 
@@ -36,7 +37,7 @@ public:
     void render() const;
     glm::mat4 generateTransform() const;
     void generateTransform(glm::mat4& transform) const;
-    void Part::computeShapes();
+    void Part::computeShapes(bool circular = false, float offset = 0);
 };
 
 #endif

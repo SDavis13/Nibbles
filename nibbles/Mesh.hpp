@@ -17,6 +17,7 @@ public:
     Mesh(const char * path);
     Mesh() : valid(false) {}
     std::vector<b2Vec2> computeHullPoly();
+    float computeMaxRadius();
 };
 
 #endif
