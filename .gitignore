@@ -142,7 +142,7 @@ artifacts/
 *_i.h
 *.ilk
 *.meta
-*.obj
+#*.obj #this is also the extension for Wavefront .objs which we want
 *.pch
 *.pdb
 *.pgc
