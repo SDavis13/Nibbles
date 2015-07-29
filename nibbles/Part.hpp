@@ -25,16 +25,18 @@ public:
     Mesh mesh;
     bool valid;
     b2Fixture* fixture;
-    b2Shape* shape;
+    std::vector<b2Shape*> shapes;
     Part(Entity& source, Mesh& mesh, glm::vec3 relPosition = glm::vec3(0), glm::vec3 relRotAxis = glm::vec3(0,1,0), 
             float relAngle = 0, glm::vec3 relScale = glm::vec3(1)) : 
                 whole(source), position(relPosition), rotationAxis(relRotAxis), angle(relAngle), 
                     scale(relScale), mesh(mesh), valid(true) {source.addPart(*this); }
     Part() : whole(defaultEntity) {valid = false;}
-    void render() const;
+    ~Part();
     void render(glm::mat4& model) const;
+    void render() const;
     glm::mat4 generateTransform() const;
     void generateTransform(glm::mat4& transform) const;
+    void Part::computeShapes();
 };
 
 #endif

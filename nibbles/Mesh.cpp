@@ -27,7 +27,7 @@ Mesh::Mesh(const char * path)
     numvertices = (GLuint)indexed_vertices.size() - startvertex;
 }
 
-b2PolygonShape Mesh::getHullWrap(){
+std::vector<b2Vec2> Mesh::computeHullPoly(){
     std::vector<b2Vec2> verticesIn = std::vector<b2Vec2>();
     std::vector<b2Vec2> verticesOut = std::vector<b2Vec2>();
 
@@ -60,7 +60,7 @@ b2PolygonShape Mesh::getHullWrap(){
         }
     }
 
-    int nextIdx = farLeftIndex;
+    unsigned int nextIdx = farLeftIndex;
     verticesOut.push_back(verticesIn[farLeftIndex]);
 
     //create hull wrap vertices (counter clockwise order)
@@ -70,7 +70,9 @@ b2PolygonShape Mesh::getHullWrap(){
             for(j = 0; j < verticesIn.size(); ++j){
                 if(nextIdx != i && nextIdx != j && i != j){
                     int orientation = angleOrientation(verticesIn[nextIdx], verticesIn[i], verticesIn[j]);
-                    if(orientation == CLOCKWISE){
+                    if(orientation == CLOCKWISE || (orientation == COLINEAR && 
+                                floatSign(verticesIn[nextIdx].x - verticesIn[i].x) == 
+                                floatSign(verticesIn[i].x - verticesIn[j].x) ) ){
                         nextOnHull = false;
                         break;
                     }
@@ -84,16 +86,5 @@ b2PolygonShape Mesh::getHullWrap(){
         }
     }while(nextIdx != farLeftIndex);
 
-    if(verticesOut.size() > 8){
-        int endIndex1 = -1, endIndex2 = -1;
-        for(i = 0; i < verticesOut.size(); ++i){
-            if(fabs(verticesOut[i].y) < 0.01){
-                
-            }else if(floatSign(verticesOut[i].y) * floatSign(verticesOut[i].y) == -1){
-
-            }
-        }
-    }
-
-    return b2PolygonShape();
+    return verticesOut;
 }

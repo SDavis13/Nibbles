@@ -2,6 +2,7 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include <vector>
 #include <GL/glew.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 
@@ -15,7 +16,7 @@ public:
     bool valid;
     Mesh(const char * path);
     Mesh() : valid(false) {}
-    b2PolygonShape getHullWrap();
+    std::vector<b2Vec2> computeHullPoly();
 };
 
 #endif
