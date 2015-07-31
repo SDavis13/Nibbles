@@ -22,4 +22,7 @@ void Entity::update(){
     b2Vec2 pos2d = primeBody->GetPosition();
     position.x = pos2d.x;
     position.z = pos2d.y;
+    behavior();
 }
+
+void Entity::behavior(){}

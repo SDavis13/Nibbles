@@ -9,8 +9,8 @@
 #include <Box2D/Dynamics/b2Body.h>
 
 class Part;
-class Entity
 
+class Entity
 {
 public:
     glm::vec3 position;
@@ -20,6 +20,8 @@ public:
     std::vector<Part> parts;
     bool physValid;
     b2Body* primeBody;
+    float mass;
+    float energy;
     unsigned short centerMode; //unused at the moment
     Entity(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false) {}
@@ -28,6 +30,7 @@ public:
     void render(glm::mat4 transform);
     void render();
     void update();
+    virtual void behavior();
 };
 
 #endif
