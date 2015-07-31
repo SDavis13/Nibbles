@@ -18,8 +18,8 @@ void Entity::render(glm::mat4 transform){
 }
 
 void Entity::update(){
-    angle = body->GetAngle();
-    b2Vec2 pos2d = body->GetPosition();
+    angle = primeBody->GetAngle();
+    b2Vec2 pos2d = primeBody->GetPosition();
     position.x = pos2d.x;
     position.z = pos2d.y;
 }
