@@ -26,3 +26,5 @@ void Entity::update(){
 }
 
 void Entity::behavior(){}
+
+void Entity::initialize(){}

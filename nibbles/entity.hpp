@@ -30,6 +30,7 @@ public:
     void render(glm::mat4 transform);
     void render();
     void update();
+    virtual void initialize(int type);
     virtual void behavior();
 };
 
