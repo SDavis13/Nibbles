@@ -62,7 +62,7 @@ int initializeOGLstuff(){
     vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
 
     // Load the texture
-	Texture = loadBMP_custom("test.bmp");
+	Texture = loadBMP_custom("textures.bmp");
 
 	// Get a handle for our "myTextureSampler" uniform
 	TextureID  = glGetUniformLocation(programID, "myTextureSampler");

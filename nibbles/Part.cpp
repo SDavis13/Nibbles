@@ -64,7 +64,7 @@ void Part::computeShapes(bool circular, float offset){
 
         for(int i = 0; i < vertices.size(); ++i){
             b2PolygonShape* myShape = new b2PolygonShape;
-            myShape->Set(&((vertices[i])[0]), (vertices[i]).size() );
+            myShape->Set(&(vertices[i]).front(), (vertices[i]).size() );
             shapes.push_back(myShape);
         }
     }

@@ -14,7 +14,7 @@
 #include "utils.hpp"
 
 void Mesh::computeHull(){
-    /*
+    
     std::vector<b2Vec2> verticesIn = std::vector<b2Vec2>();
     std::vector<b2Vec2> verticesOut = std::vector<b2Vec2>();
 
@@ -39,11 +39,12 @@ void Mesh::computeHull(){
 
     //remove duplicates
     for(i = 0; i < verticesIn.size(); ++i){
-        for(j = i+1; j < verticesIn.size(); ++j){
+        for(j = i+1; j < verticesIn.size();){
             if( (fabs(verticesIn[i].x - verticesIn[j].x) < 0.01) && 
                     (fabs(verticesIn[i].y - verticesIn[j].y) < 0.01) ){
                 verticesIn.erase(verticesIn.begin() + j);
-                --j;
+            }else{
+                ++j;
             }
         }
     }
@@ -68,9 +69,11 @@ void Mesh::computeHull(){
             for(j = 0; j < verticesIn.size(); ++j){
                 if(nextIdx != i && nextIdx != j && i != j){
                     int orientation = angleOrientation(verticesIn[nextIdx], verticesIn[i], verticesIn[j]);
-                    if(orientation == CLOCKWISE || (orientation == COLINEAR && 
+                    if(orientation == CLOCKWISE || (orientation == COLINEAR && (
                                 floatSign(verticesIn[nextIdx].x - verticesIn[i].x) == 
-                                floatSign(verticesIn[i].x - verticesIn[j].x) ) ){
+                                floatSign(verticesIn[i].x - verticesIn[j].x) ||
+                                floatSign(verticesIn[nextIdx].y - verticesIn[i].y) == 
+                                floatSign(verticesIn[i].y - verticesIn[j].y)) ) ){
                         nextOnHull = false;
                         break;
                     }
@@ -96,7 +99,7 @@ void Mesh::computeHull(){
     }
 
     hullValid = true;
-    */
+    
 }
 
 Mesh::Mesh(const char * path)

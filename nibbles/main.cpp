@@ -40,11 +40,11 @@ int main( void )
     std::vector<Entity*> entities;
     
     Mesh core("nibblercore.obj");
-    Mesh tear("tearshot.obj");
+    Mesh tear("coneship.obj");
 
     Entity nibbles(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     Part nibblerCore(nibbles, core, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    Entity myLight(glm::vec3(4,4,4), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Entity myLight(glm::vec3(0,7,0), glm::vec3(0,1,0), 0, glm::vec3(1));
     LightSource theLight(myLight, core, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
     Entity eTearShot1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
     Part tearShot(eTearShot1, tear, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
