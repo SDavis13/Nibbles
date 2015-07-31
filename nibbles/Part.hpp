@@ -31,7 +31,7 @@ public:
     Part(Entity& source, Mesh& mesh, glm::vec3 relPosition = glm::vec3(0), glm::vec3 relRotAxis = glm::vec3(0,1,0), 
             float relAngle = 0, glm::vec3 relScale = glm::vec3(1)) : 
                 whole(source), position(relPosition), rotationAxis(relRotAxis), angle(relAngle), 
-                    scale(relScale), mesh(mesh), valid(true) {source.addPart(*this); }
+                    scale(relScale), mesh(mesh), valid(true), physical(false) {source.addPart(*this); }
     Part() : whole(defaultEntity), valid(false), physical(false) {}
     ~Part() { if(physical) universe->DestroyBody(body); }
     void render(glm::mat4& model) const;

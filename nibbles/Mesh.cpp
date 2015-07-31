@@ -14,6 +14,7 @@
 #include "utils.hpp"
 
 void Mesh::computeHull(){
+    /*
     std::vector<b2Vec2> verticesIn = std::vector<b2Vec2>();
     std::vector<b2Vec2> verticesOut = std::vector<b2Vec2>();
 
@@ -22,7 +23,7 @@ void Mesh::computeHull(){
 
     //transfer vertices and compute radius
     maxRadius = 0;
-    for(i = startindex; i < startindex + numvertices; ++i){
+    for(i = startvertex; i < startvertex + numvertices; ++i){
         //get vertex
         b2Vec2 vertex(indexed_vertices[i].x, indexed_vertices[i].z);
         
@@ -95,6 +96,7 @@ void Mesh::computeHull(){
     }
 
     hullValid = true;
+    */
 }
 
 Mesh::Mesh(const char * path)
