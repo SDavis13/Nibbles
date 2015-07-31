@@ -49,32 +49,23 @@ void Part::render() const{
 void Part::computeShapes(bool circular, float offset){
     if(circular){
         b2CircleShape* shape = new b2CircleShape();
-        shape->m_radius = mesh.computeMaxRadius() + offset;
+        shape->m_radius = mesh.getRadius() + offset;
         shapes.push_back(shape);
     }else{
-        std::vector<b2Vec2> vertices = mesh.computeHullPoly();
+        std::vector<std::vector<b2Vec2> > vertices = mesh.getHullPoly();
         if(!(scale.x == 0 && scale.z == 0)){
             for(int i = 0; i < vertices.size(); ++i){
-                vertices[i].x *= scale.x;
-                vertices[i].y *= scale.z;
+                for(int j = 0; j < vertices[i].size(); ++j){
+                    (vertices[i])[j].x *= scale.x;
+                    (vertices[i])[j].y *= scale.z;
+                }
             }
         }
 
-        if(vertices.size() > 8){
-            std::size_t halfSize = vertices.size()/2;
-            std::vector<b2Vec2> out1(vertices.begin(), vertices.begin() + halfSize + 1);
-            std::vector<b2Vec2> out2(vertices.begin() + halfSize, vertices.end());
-            out2.push_back(vertices[0]);
-            b2PolygonShape* shape1 = new b2PolygonShape;
-            shape1->Set(&out1[0], out1.size());
-            b2PolygonShape* shape2 = new b2PolygonShape;
-            shape2->Set(&out1[0], out1.size());
-            shapes.push_back(shape1);
-            shapes.push_back(shape2);
-        }else{
-            b2PolygonShape* shape = new b2PolygonShape;
-            shape->Set(&vertices[0], vertices.size());
-            shapes.push_back(shape);
+        for(int i = 0; i < vertices.size(); ++i){
+            b2PolygonShape* myShape = new b2PolygonShape;
+            myShape->Set(&((vertices[i])[0]), (vertices[i]).size() );
+            shapes.push_back(myShape);
         }
     }
 }

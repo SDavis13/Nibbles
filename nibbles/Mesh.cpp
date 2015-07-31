@@ -13,30 +13,27 @@
 #include "globals.hpp"
 #include "utils.hpp"
 
-Mesh::Mesh(const char * path)
-{
-    valid = true;
-    startindex = (GLuint)indices.size();
-    startvertex = (GLuint)indexed_vertices.size();
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals;
-    bool res = loadOBJ(path, vertices, uvs, normals);
-    indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
-    numindices = (GLuint)indices.size() - startindex;
-    numvertices = (GLuint)indexed_vertices.size() - startvertex;
-}
-
-std::vector<b2Vec2> Mesh::computeHullPoly(){
+void Mesh::computeHull(){
     std::vector<b2Vec2> verticesIn = std::vector<b2Vec2>();
     std::vector<b2Vec2> verticesOut = std::vector<b2Vec2>();
 
     unsigned int i = 0;
     unsigned int j = 0;
 
-    //transfer vertices
+    //transfer vertices and compute radius
+    maxRadius = 0;
     for(i = startindex; i < startindex + numvertices; ++i){
-        verticesIn.push_back(b2Vec2(indexed_vertices[i].x, indexed_vertices[i].z));
+        //get vertex
+        b2Vec2 vertex(indexed_vertices[i].x, indexed_vertices[i].z);
+        
+        //compute radius
+        float curRad = vertex.Length();
+        if(curRad > maxRadius){
+            maxRadius = curRad;
+        }
+
+        //push to vector
+        verticesIn.push_back(vertex);
     }
 
     //remove duplicates
@@ -86,20 +83,45 @@ std::vector<b2Vec2> Mesh::computeHullPoly(){
         }
     }while(nextIdx != farLeftIndex);
 
-    return verticesOut;
+    if(verticesOut.size() > 8){
+        std::size_t halfSize = verticesOut.size()/2;
+        std::vector<b2Vec2> out1(verticesOut.begin(), verticesOut.begin() + halfSize + 1);
+        std::vector<b2Vec2> out2(verticesOut.begin() + halfSize, verticesOut.end());
+        out2.push_back(verticesOut[0]);
+        hullPoly.push_back(out1);
+        hullPoly.push_back(out2);
+    }else{
+        hullPoly.push_back(verticesOut);
+    }
+
+    hullValid = true;
 }
 
-float Mesh::computeMaxRadius(){
-    float radius = 0;
+Mesh::Mesh(const char * path)
+{
+    valid = true;
+    startindex = (GLuint)indices.size();
+    startvertex = (GLuint)indexed_vertices.size();
+	std::vector<glm::vec3> vertices;
+	std::vector<glm::vec2> uvs;
+	std::vector<glm::vec3> normals;
+    bool res = loadOBJ(path, vertices, uvs, normals);
+    indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+    numindices = (GLuint)indices.size() - startindex;
+    numvertices = (GLuint)indexed_vertices.size() - startvertex;
+    computeHull();
+}
 
-    //transfer vertices
-    for(unsigned int i = startindex; i < startindex + numvertices; ++i){
-        glm::vec3& vertex = indexed_vertices[i];
-        float curRad = sqrt(vertex.x*vertex.x+vertex.y*vertex.y);
-        if(curRad > radius){
-            radius = curRad;
-        }
+std::vector<std::vector<b2Vec2> > & Mesh::getHullPoly(){
+    if(valid && !hullValid){
+        computeHull();
     }
-    
-    return radius;
+    return hullPoly;
+}
+
+float Mesh::getRadius(){
+    if(valid && !hullValid){
+        computeHull();
+    }
+    return maxRadius;
 }

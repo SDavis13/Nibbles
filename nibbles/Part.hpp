@@ -24,6 +24,7 @@ public:
     glm::vec3 scale;
     Mesh mesh;
     bool valid;
+    bool physical;
     b2Body* body;
     std::vector<b2Fixture*> fixtures;
     std::vector<b2Shape*> shapes;
@@ -31,8 +32,8 @@ public:
             float relAngle = 0, glm::vec3 relScale = glm::vec3(1)) : 
                 whole(source), position(relPosition), rotationAxis(relRotAxis), angle(relAngle), 
                     scale(relScale), mesh(mesh), valid(true) {source.addPart(*this); }
-    Part() : whole(defaultEntity) {valid = false;}
-    ~Part();
+    Part() : whole(defaultEntity), valid(false), physical(false) {}
+    ~Part() { if(physical) universe->DestroyBody(body); }
     void render(glm::mat4& model) const;
     void render() const;
     glm::mat4 generateTransform() const;

@@ -14,11 +14,14 @@ public:
     GLuint numindices;
     GLuint numvertices;
     bool valid;
+    bool hullValid;
+    std::vector<std::vector<b2Vec2> > hullPoly;
+    float maxRadius;
     Mesh(const char * path);
-    Mesh() : valid(false) {}
-    std::vector<b2Vec2> computeHullPoly();
-    float computeMaxRadius();
-
+    Mesh() : valid(false), hullValid(false) {}
+    void computeHull();
+    std::vector<std::vector<b2Vec2> > & getHullPoly();
+    float getRadius();
 };
 
 #endif
