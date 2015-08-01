@@ -40,7 +40,7 @@ int main( void )
     std::vector<Entity*> entities;
     
     Mesh core("nibblercore.obj");
-    Mesh tear("coneship.obj");
+    Mesh tear("energycanister.obj");
 
     Entity nibbles(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     Part nibblerCore(nibbles, core, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
