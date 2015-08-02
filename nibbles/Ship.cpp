@@ -11,7 +11,7 @@ void Ship::initialize(int type){
 void Ship::behavior(){
 	
 	b2Vec2 temp = player->getCenter();
-	float distance = temp.dst(position);
+	float distance = (getCenter()-temp).Length();
 	/*if(distance < field)
 		//apply force in direction of nibbles
 	else

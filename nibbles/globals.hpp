@@ -30,8 +30,7 @@ using namespace glm;
 #define COMPILE_HERE extern
 #endif
 
-class Entity;
-class Nibbler : public Entity;
+class Nibbler;
 
 #define COUNTERCLOCKWISE 1
 #define COLINEAR 0
