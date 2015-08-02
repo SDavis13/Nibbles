@@ -32,6 +32,7 @@ public:
     void update();
     virtual void initialize(int type);
     virtual void behavior();
+	b2Vec2 getCenter();
 };
 
 #endif

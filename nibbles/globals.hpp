@@ -30,6 +30,9 @@ using namespace glm;
 #define COMPILE_HERE extern
 #endif
 
+class Entity;
+class Nibbler : public Entity;
+
 #define COUNTERCLOCKWISE 1
 #define COLINEAR 0
 #define CLOCKWISE -1
@@ -37,6 +40,7 @@ using namespace glm;
 COMPILE_HERE GLFWwindow* window;
 
 COMPILE_HERE b2World* universe;
+COMPILE_HERE Nibbler* player;
 
 COMPILE_HERE std::vector<unsigned short> indices;
 COMPILE_HERE std::vector<glm::vec3> indexed_vertices;
