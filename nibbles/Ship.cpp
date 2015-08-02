@@ -10,16 +10,26 @@ void Ship::initialize(int type){
 }
 void Ship::behavior(){
 	
-	b2Vec2 temp = player->getCenter();
-	float distance = (getCenter()-temp).Length();
-	/*if(distance < field)
+	b2Vec2 temp = getCenter()-player->getCenter();
+	float distance = temp.Length();
+	temp.Normalize();
+	float field = FIELDSCALE*player->getGravityStrength(primeBody->GetMass(), distance);
+	if(distance < field){
 		//apply force in direction of nibbles
-	else
-		//apply force perpendicular to direction of nibbles
-		//or
-		//if(distance > outerRange)
-			//pick direction and apply force
-			//return
+		temp.x*=-maxThrust;
+		temp.y*=-maxThrust;
+	}
+	else{
+		if(distance > field *3){
+		//pick direction and apply force
+		temp.x*=maxThrust;
+		temp.y*=maxThrust;
+		}else{
+		float holder = temp.x;
+		temp.x = temp.y*maxThrust;
+		temp.y = holder*maxThrust;
+		}
+	}
 	//
-	*/
+	primeBody->ApplyForceToCenter(temp, true);
 }

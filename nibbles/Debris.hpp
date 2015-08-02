@@ -9,9 +9,6 @@
 class Debris : Entity
 {
 public:
-	GLuint size;
-	GLuint energy;
-
     Debris(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale) {}
     Debris() : Entity() {}

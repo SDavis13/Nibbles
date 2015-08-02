@@ -35,6 +35,7 @@ class Nibbler;
 #define COUNTERCLOCKWISE 1
 #define COLINEAR 0
 #define CLOCKWISE -1
+#define FIELDSCALE 7.0f
 
 COMPILE_HERE GLFWwindow* window;
 

@@ -9,9 +9,8 @@
 class Ship : Entity
 {
 public:
-	GLuint size;
-	GLuint energy;
-
+	float speed;
+	float maxThrust;
     Ship(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale) {}
     Ship() : Entity() {}
