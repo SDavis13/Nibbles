@@ -65,24 +65,26 @@ void Mesh::computeHull(){
     //create hull wrap vertices (counter clockwise order)
     do{
         for(i = 0; i < verticesIn.size(); ++i){
-            bool nextOnHull = true;
-            for(j = 0; j < verticesIn.size(); ++j){
-                if(nextIdx != i && nextIdx != j && i != j){
-                    int orientation = angleOrientation(verticesIn[nextIdx], verticesIn[i], verticesIn[j]);
-                    if(orientation == CLOCKWISE || (orientation == COLINEAR && (
-                                floatSign(verticesIn[nextIdx].x - verticesIn[i].x) == 
-                                floatSign(verticesIn[i].x - verticesIn[j].x) ||
-                                floatSign(verticesIn[nextIdx].y - verticesIn[i].y) == 
-                                floatSign(verticesIn[i].y - verticesIn[j].y)) ) ){
-                        nextOnHull = false;
-                        break;
+            if(nextIdx != i){
+                bool nextOnHull = true;
+                for(j = 0; j < verticesIn.size(); ++j){
+                    if(nextIdx != j && i != j){
+                        int orientation = angleOrientation(verticesIn[nextIdx], verticesIn[i], verticesIn[j]);
+                        if(orientation == CLOCKWISE || (orientation == COLINEAR && (
+                                    (floatSign(verticesIn[nextIdx].x - verticesIn[i].x) == 
+                                    floatSign(verticesIn[i].x - verticesIn[j].x)) &&
+                                    (floatSign(verticesIn[nextIdx].y - verticesIn[i].y) == 
+                                    floatSign(verticesIn[i].y - verticesIn[j].y))  ) ) ){
+                            nextOnHull = false;
+                            break;
+                        }
                     }
                 }
-            }
-            if(nextOnHull){
-                nextIdx = i;
-                verticesOut.push_back(verticesIn[nextIdx]);
-                break;
+                if(nextOnHull){
+                    nextIdx = i;
+                    verticesOut.push_back(verticesIn[nextIdx]);
+                    break;
+                }
             }
         }
     }while(nextIdx != farLeftIndex);
