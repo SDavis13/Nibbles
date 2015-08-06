@@ -7,9 +7,11 @@
 
 void Debris::initialize(int type){
 	std::string path = "";
+    b2FixtureDef fixDef;
+    b2BodyDef bodDef;
+    if(type == 0)
+        type = randDebrisType();
 	switch(type){
-	case 0:
-		type = randDebrisType();
 	case 1:
 		path = "debris1.obj";
 		break;
@@ -22,12 +24,14 @@ void Debris::initialize(int type){
 	case 4:
 		path = "energycanister.obj";
 		break;
+    default:
+        path = "debris1.obj";
+        break;
 	}
     Mesh debrisMesh(path.c_str());
     Part* debrisPart = new Part(*this, debrisMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(debrisPart);
-	b2FixtureDef fixDef;
-    b2BodyDef bodDef;
+	
     bodDef.type = b2_dynamicBody;
     bodDef.fixedRotation = true;
     std::vector<b2Shape*> shapes = debrisPart->computeShapes(true, 0);

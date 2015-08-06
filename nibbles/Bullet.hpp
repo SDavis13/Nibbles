@@ -5,6 +5,7 @@
 #include "Entity.hpp"
 
 #define BULLET 0
+#define TEARSHOT 1
 
 class Bullet : public Entity
 {
