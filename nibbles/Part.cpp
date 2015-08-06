@@ -46,7 +46,8 @@ void Part::render() const{
     render(generateTransform());
 }
 
-void Part::computeShapes(bool circular, float offset){
+std::vector<b2Shape*> Part::computeShapes(bool circular, float offset){
+    std::vector<b2Shape*> shapes;
     if(circular){
         b2CircleShape* shape = new b2CircleShape();
         shape->m_radius = mesh.getRadius() + offset;
@@ -68,4 +69,14 @@ void Part::computeShapes(bool circular, float offset){
             shapes.push_back(myShape);
         }
     }
+    return shapes;
+}
+
+void Part::initialize(std::vector<b2Shape*>& shapes, b2FixtureDef fixDefinition, b2BodyDef bodyDefinition){
+    body = universe->CreateBody(&bodyDefinition);
+    for(int i = 0; i < shapes.size(); i++){
+        fixDefinition.shape = shapes[i];
+        body->CreateFixture(&fixDefinition);
+    }
+    physValid = true;
 }

@@ -4,6 +4,9 @@
 
 #include <glm/glm.hpp>
 
+#include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Dynamics/b2Fixture.h>
+
 #include "globals.hpp"
 #include "Mesh.hpp"
 #include "Entity.hpp"
@@ -26,8 +29,6 @@ public:
     bool valid;
     bool physValid;
     b2Body* body;
-    std::vector<b2Fixture*> fixtures;
-    std::vector<b2Shape*> shapes;
     Part(Entity& source, Mesh& mesh, glm::vec3 relPosition = glm::vec3(0), glm::vec3 relRotAxis = glm::vec3(0,1,0), 
             float relAngle = 0, glm::vec3 relScale = glm::vec3(1)) : 
                 whole(source), position(relPosition), rotationAxis(relRotAxis), angle(relAngle), 
@@ -38,7 +39,8 @@ public:
     void render() const;
     glm::mat4 generateTransform() const;
     void generateTransform(glm::mat4& transform) const;
-    void Part::computeShapes(bool circular = false, float offset = 0);
+    std::vector<b2Shape*> computeShapes(bool circular = false, float offset = 0);
+    void initialize(std::vector<b2Shape*>& shapes, b2FixtureDef fixDefinition, b2BodyDef bodyDefinition);
 };
 
 #endif

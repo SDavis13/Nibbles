@@ -10,6 +10,7 @@ using namespace glm;
 
 #include "controls.hpp"
 #include "nibbles\globals.hpp"
+#include "nibbles\Nibbler.hpp"
 
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
@@ -90,7 +91,7 @@ void computeMatricesFromInputs(){
 		position -= right * deltaTime * speed;
 	}
 
-	float size = *player.energy;
+	float size = player->energy;
 	float scalar = int(size) + pow((size - int(size)),2); //scalar for view
 
 	float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
