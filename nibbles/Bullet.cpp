@@ -3,7 +3,16 @@
 #include "Part.hpp"
 
 void Bullet::initialize(int type){
-    Mesh bulletMesh("bullet.obj");
+    std::string path = "";
+    switch(type){
+    case 0:
+        path = "bullet.obj";
+        break;
+    case 1:
+        path = "tearshot.obj";
+        break;
+    }
+    Mesh bulletMesh(path.c_str());
     Part* bulletPart = new Part(*this, bulletMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(bulletPart);
 	b2FixtureDef fixDef;
