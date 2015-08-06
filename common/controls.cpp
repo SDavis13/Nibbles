@@ -53,11 +53,6 @@ void computeMatricesFromInputs(){
 	glfwGetCursorPos(window, &xpos, &ypos);
     glfwGetWindowSize(window, &xsize, &ysize);
 
-    xpos -= xsize/2;
-    ypos -= ysize/2;
-    xpos = 2*xpos/xsize;
-    ypos = 2*ypos/ysize;
-
 	// Zoom in
 	if (glfwGetKey( window, GLFW_KEY_W ) == GLFW_PRESS){
 		zoom -= deltaTime * myspeed;
@@ -73,6 +68,17 @@ void computeMatricesFromInputs(){
         viewDist =  temp + (pow((size-temp),curve))/(pow(period,(curve-1))) + player->MIN_SIZE;
     }
     float cameradistance = viewDist + zoom;
+
+	int minDim;
+	if(xsize > ysize){
+		minDim = ysize;
+	}else{
+		minDim = xsize;
+	}
+    xpos -= xsize/2;//center at 0
+    ypos -= ysize/2;
+    xpos = size*xpos/minDim;//scale to GL coordinates
+    ypos = size*ypos/minDim;
 
 	float FoV = myinitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
