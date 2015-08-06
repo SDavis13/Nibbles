@@ -16,6 +16,8 @@ void Nibbler::initialize(int type){
     std::vector<b2Shape*> shapes = nibblerPart->computeShapes(true, 0);
     nibblerPart->initialize(shapes, fixDef, bodDef);
     primeBody = nibblerPart->body;
+    mass = primeBody->GetMass();
+    energy = MIN_SIZE;
 }
 b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
     b2Vec2 difference = primeBody->GetWorldCenter() - objLoc;

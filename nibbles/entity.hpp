@@ -24,7 +24,7 @@ public:
     float energy;
     unsigned short centerMode; //unused at the moment
     Entity(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
-            : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false) {}
+            : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false), mass(0), energy(0) {}
     Entity() : position(glm::vec3(0)), rotationAxis(glm::vec3(0,1,0)), angle(0), scale(glm::vec3(1)), physValid(false) {}
     ~Entity();
     void addPart(Part* part);
