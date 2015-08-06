@@ -55,7 +55,7 @@ int main( void )
     entities.push_back(&myDebris1);
 
     nibbles->initialize(0);
-    //myDebris1.initialize(4);
+    myDebris1.initialize(4);
 
 	// Load it into a VBO
 
@@ -164,10 +164,10 @@ int main( void )
         theLight.setUpLight();
 
         for(int i = 0; i < entities.size(); ++i){
+            entities[i]->update();
             entities[i]->render();
         }
 
-        /*
         b2Body* bodies = universe->GetBodyList();
         while(bodies->GetNext() != NULL){
             if(bodies != player->primeBody){
@@ -175,7 +175,6 @@ int main( void )
             }
             bodies = bodies->GetNext();
         }
-        */
 
         if(framenumber%1024 == 0){
             framenumber--;

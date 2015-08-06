@@ -30,11 +30,13 @@ void Entity::render(glm::mat4 transform){
 }
 
 void Entity::update(){
-    angle = (primeBody->GetAngle())*180/M_PI;
-    b2Vec2 pos2d = primeBody->GetPosition();
-    position.x = pos2d.x;
-    position.z = pos2d.y;
-    behavior();
+    if(physValid){
+        angle = (primeBody->GetAngle())*180/M_PI;
+        b2Vec2 pos2d = primeBody->GetPosition();
+        position.x = pos2d.x;
+        position.z = pos2d.y;
+        behavior();
+    }
 }
 
 void Entity::behavior(){}

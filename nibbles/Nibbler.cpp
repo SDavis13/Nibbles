@@ -1,6 +1,8 @@
 #include "Nibbler.hpp"
 #include "Mesh.hpp"
 #include "Part.hpp"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2Body.h>
@@ -13,6 +15,8 @@ void Nibbler::initialize(int type){
     b2BodyDef bodDef;
     bodDef.type = b2_dynamicBody;
     bodDef.fixedRotation = true;
+    bodDef.position = b2Vec2(position.x, position.z);
+    bodDef.angle = angle*M_PI/180;
     std::vector<b2Shape*> shapes = nibblerPart->computeShapes(true, 0);
     nibblerPart->initialize(shapes, fixDef, bodDef);
     primeBody = nibblerPart->body;
