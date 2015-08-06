@@ -27,6 +27,7 @@ public:
             : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false), mass(0), energy(0) {}
     Entity() : position(glm::vec3(0)), rotationAxis(glm::vec3(0,1,0)), angle(0), scale(glm::vec3(1)), physValid(false) {}
     ~Entity();
+    //create a copy constructor
     void addPart(Part* part);
     void render(glm::mat4 transform);
     void render();
