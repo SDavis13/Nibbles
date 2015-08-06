@@ -5,8 +5,11 @@
 #include <math.h>
 
 Entity::~Entity(){
-    while(!parts.empty()) 
-        delete parts.back(), parts.pop_back();
+    for(int i = 0; i < parts.size(); ++i){
+        delete parts[i];
+        parts[i] = NULL;
+    }
+    parts.clear();
     primeBody = NULL;
 }
 

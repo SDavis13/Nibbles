@@ -55,7 +55,7 @@ int main( void )
     entities.push_back(&myDebris1);
 
     nibbles->initialize(0);
-    myDebris1.initialize(4);
+    //myDebris1.initialize(4);
 
 	// Load it into a VBO
 
