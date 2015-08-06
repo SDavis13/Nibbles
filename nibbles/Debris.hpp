@@ -4,7 +4,11 @@
 
 #include "Entity.hpp"
 
-#define DEBRIS1_OBJ 2
+#define RANDOM 0
+#define DEBRIS1 1
+#define DEBRIS2 2
+#define DEBRIS3 3
+#define CANISTER 4
 
 class Debris : Entity
 {
@@ -13,6 +17,7 @@ public:
             : Entity(position, rotationAxis, angle, scale) {}
     Debris() : Entity() {}
     virtual void initialize(int type);
+	static int randDebrisType();
     virtual void behavior();
 
 };
