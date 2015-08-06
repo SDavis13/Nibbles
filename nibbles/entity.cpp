@@ -5,9 +5,9 @@
 #include <math.h>
 
 Entity::~Entity(){
-    for(int i = 0; i < parts.size(); ++i){
-        delete parts[i];
-    }
+    while(!parts.empty()) 
+        delete parts.back(), parts.pop_back();
+    primeBody = NULL;
 }
 
 void Entity::addPart(Part* part){
