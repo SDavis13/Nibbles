@@ -31,7 +31,7 @@ glm::mat4 getProjectionMatrix(){
 // Initial Field of View
 static float myinitialFoV = 45.0f;
 
-static float zoom = 1;
+static float zoom = 4;
 
 static float myspeed = 10.0f;
 static double mylasttime = 0;
@@ -79,6 +79,8 @@ void computeMatricesFromInputs(){
     ypos -= ysize/2;
     xpos = size*xpos/minDim;//scale to GL coordinates
     ypos = size*ypos/minDim;
+
+    player->applyThrust(b2Vec2(xpos,ypos));
 
 	float FoV = myinitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
