@@ -10,7 +10,7 @@
 #define DEBRIS3 3
 #define CANISTER 4
 
-class Debris : Entity
+class Debris : public Entity
 {
 public:
     Debris(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 

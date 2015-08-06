@@ -27,6 +27,7 @@ using namespace glm;
 #include "Mesh.hpp"
 #include "LightSource.hpp"
 #include "Nibbler.hpp"
+#include "Debris.hpp"
 
 //#define CRTDBG_MAP_ALLOC
 //#include <crtdbg.h>
@@ -46,7 +47,7 @@ int main( void )
     Nibbler* nibbles = player;
     Entity myLight(glm::vec3(0,10,0), glm::vec3(0,1,0), 0, glm::vec3(1));
     LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
-    Entity myDebris1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Debris myDebris1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
     Part pCanister(myDebris1, canister, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(0.1));
 
     entities.push_back(nibbles);
@@ -54,6 +55,7 @@ int main( void )
     entities.push_back(&myDebris1);
 
     nibbles->initialize(0);
+    myDebris1.initialize(4);
 
 	// Load it into a VBO
 

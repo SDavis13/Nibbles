@@ -59,4 +59,4 @@ int Debris::randDebrisType(){
 	srand(time(NULL));
 	return (rand() % 3 + 1);
 }
-void behavior(){}
+void Debris::behavior(){}
