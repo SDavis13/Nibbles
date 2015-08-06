@@ -5,9 +5,11 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 // Include GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <cmath>
 using namespace glm;
 
 #include "controls.hpp"
+#include "nibbles\globals.hpp"
 
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
@@ -48,7 +50,7 @@ void computeMatricesFromInputs(){
 	glfwGetCursorPos(window, &xpos, &ypos);
 
 	// Reset mouse position for next frame
-	glfwSetCursorPos(window, 1024/2, 768/2);
+	//glfwSetCursorPos(window, 1024/2, 768/2);
 
 	// Compute new orientation
 	horizontalAngle += mouseSpeed * float(1024/2 - xpos );
@@ -87,6 +89,9 @@ void computeMatricesFromInputs(){
 	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
 		position -= right * deltaTime * speed;
 	}
+
+	float size = *player.energy;
+	float scalar = int(size) + pow((size - int(size)),2); //scalar for view
 
 	float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 

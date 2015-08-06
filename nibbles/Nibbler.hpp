@@ -17,7 +17,7 @@ public:
     virtual void initialize(int type);
     virtual void behavior();
 	float getGravityStrength(float mass, float distance);
-	void applyThrust(glm::vec2 point){}
+	void applyThrust(glm::vec2 point);
 };
 
 #endif
