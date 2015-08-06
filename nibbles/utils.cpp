@@ -13,3 +13,8 @@ int angleOrientation(const b2Vec2& first, const b2Vec2& center, const b2Vec2& la
         return CLOCKWISE;
     }
 }
+
+float fmax(float f1, float f2){
+    if(f1 > f2) return f1;
+    else return f2;
+}
