@@ -1,6 +1,9 @@
 #include "Entity.hpp"
 #include "Part.hpp"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 Entity::~Entity(){
     for(int i = 0; i < parts.size(); ++i){
         delete parts[i];
@@ -24,7 +27,7 @@ void Entity::render(glm::mat4 transform){
 }
 
 void Entity::update(){
-    angle = primeBody->GetAngle();
+    angle = (primeBody->GetAngle())*M_PI/180;
     b2Vec2 pos2d = primeBody->GetPosition();
     position.x = pos2d.x;
     position.z = pos2d.y;

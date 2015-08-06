@@ -26,6 +26,7 @@ using namespace glm;
 #include "Part.hpp"
 #include "Mesh.hpp"
 #include "LightSource.hpp"
+#include "Nibbler.hpp"
 
 //#define CRTDBG_MAP_ALLOC
 //#include <crtdbg.h>
@@ -39,19 +40,20 @@ int main( void )
 
     std::vector<Entity*> entities;
     
-    Mesh core("nibblercore.obj");
-    Mesh tear("energycanister.obj");
+    Mesh light("nibblercorona.obj");
+    Mesh tear("tearshot.obj");
 
-    Entity nibbles(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    Part nibblerCore(nibbles, core, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Nibbler* nibbles = player;
     Entity myLight(glm::vec3(0,7,0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    LightSource theLight(myLight, core, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
+    LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
     Entity eTearShot1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
     Part tearShot(eTearShot1, tear, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
 
-    entities.push_back(&nibbles);
+    entities.push_back(nibbles);
     entities.push_back(&myLight);
     entities.push_back(&eTearShot1);
+
+    nibbles->initialize(0);
 
 	// Load it into a VBO
 
