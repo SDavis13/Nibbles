@@ -4,8 +4,8 @@
 
 #include "Entity.hpp"
 
-#define CONESHIP_OBJ 0
-#define DRONE_OBJ 1
+#define CONESHIP 0
+#define DRONE 1
 
 class Ship : Entity
 {

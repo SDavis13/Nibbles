@@ -59,21 +59,21 @@ void Mesh::computeHull(){
         }
     }
 
-    unsigned int nextIdx = farLeftIndex;
+    unsigned int curIdx = farLeftIndex;
     verticesOut.push_back(verticesIn[farLeftIndex]);
 
     //create hull wrap vertices (counter clockwise order)
     do{
         for(i = 0; i < verticesIn.size(); ++i){
-            if(nextIdx != i){
+            if(curIdx != i){
                 bool nextOnHull = true;
                 for(j = 0; j < verticesIn.size(); ++j){
-                    if(nextIdx != j && i != j){
-                        int orientation = angleOrientation(verticesIn[nextIdx], verticesIn[i], verticesIn[j]);
+                    if(curIdx != j && i != j){
+                        int orientation = angleOrientation(verticesIn[curIdx], verticesIn[i], verticesIn[j]);
                         if(orientation == CLOCKWISE || (orientation == COLINEAR && (
-                                    (floatSign(verticesIn[nextIdx].x - verticesIn[i].x) == 
+                                    (floatSign(verticesIn[curIdx].x - verticesIn[i].x) == 
                                     floatSign(verticesIn[i].x - verticesIn[j].x)) &&
-                                    (floatSign(verticesIn[nextIdx].y - verticesIn[i].y) == 
+                                    (floatSign(verticesIn[curIdx].y - verticesIn[i].y) == 
                                     floatSign(verticesIn[i].y - verticesIn[j].y))  ) ) ){
                             nextOnHull = false;
                             break;
@@ -81,13 +81,13 @@ void Mesh::computeHull(){
                     }
                 }
                 if(nextOnHull){
-                    nextIdx = i;
-                    verticesOut.push_back(verticesIn[nextIdx]);
+                    curIdx = i;
+                    verticesOut.push_back(verticesIn[curIdx]);
                     break;
                 }
             }
         }
-    }while(nextIdx != farLeftIndex);
+    }while(curIdx != farLeftIndex);
 
     if(verticesOut.size() > 8){
         std::size_t halfSize = verticesOut.size()/2;

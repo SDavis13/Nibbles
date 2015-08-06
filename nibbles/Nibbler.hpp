@@ -9,6 +9,7 @@
 class Nibbler : public Entity
 {	
 public:
+    static const float MAX_THRUST = 5;
 	glm::vec2 previouspos;
 	glm::vec2 prepreviouspos;
     Nibbler(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
@@ -16,8 +17,8 @@ public:
     Nibbler() : Entity() {}
     virtual void initialize(int type);
     virtual void behavior();
-	float getGravityStrength(float mass, float distance);
-	void applyThrust(glm::vec2 point);
+	b2Vec2 getGravity(float objMass, b2Vec2 objLoc);
+	void applyThrust(b2Vec2 destination);
 };
 
 #endif
