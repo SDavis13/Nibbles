@@ -17,7 +17,7 @@ void Ship::initialize(int type){
         break;
     }
     
-    Part shipPart(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Part* shipPart = new Part(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(shipPart);
 }
 void Ship::behavior(){

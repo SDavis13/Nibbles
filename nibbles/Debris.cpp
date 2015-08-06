@@ -24,7 +24,7 @@ void Debris::initialize(int type){
 		break;
 	}
     Mesh debrisMesh(path.c_str());
-    Part debrisPart(*this, debrisMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Part* debrisPart = new Part(*this, debrisMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(debrisPart);
 }
 int Debris::randDebrisType(){

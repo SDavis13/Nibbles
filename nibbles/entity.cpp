@@ -1,19 +1,25 @@
 #include "Entity.hpp"
 #include "Part.hpp"
 
-void Entity::addPart(Part& part){
+Entity::~Entity(){
+    for(int i = 0; i < parts.size(); ++i){
+        delete parts[i];
+    }
+}
+
+void Entity::addPart(Part* part){
     parts.push_back(part);
 }
 
 void Entity::render(){
     for(int i = 0; i < parts.size(); ++i){
-        parts[i].render();
+        parts[i]->render();
     }
 }
 
 void Entity::render(glm::mat4 transform){
     for(int i = 0; i < parts.size(); ++i){
-        parts[i].render(transform);
+        parts[i]->render(transform);
     }
 }
 
