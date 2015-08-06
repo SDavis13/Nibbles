@@ -4,12 +4,13 @@
 
 #include "Entity.hpp"
 
-#define NIBBLERCORE_OBJ 1
+#define NIBBLERCORE 0
 
 class Nibbler : public Entity
 {	
 public:
-    static const float MAX_THRUST = 5;
+    static const int MAX_THRUST = 5;
+    static const int MIN_SIZE = 1;
 	glm::vec2 previouspos;
 	glm::vec2 prepreviouspos;
     Nibbler(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 

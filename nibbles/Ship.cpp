@@ -21,8 +21,7 @@ void Ship::initialize(int type){
     parts.push_back(shipPart);
 }
 void Ship::behavior(){
-	
-	b2Vec2 temp = getCenter()-player->getCenter();
+	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();
 	float distance = temp.Length();
 	temp.Normalize();
 	float field = FIELDSCALE*(player->getGravity(primeBody->GetMass(), temp)).Length();

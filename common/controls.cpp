@@ -1,3 +1,4 @@
+// Include GLEW
 #include <glew/glew.h>
 
 // Include GLFW
@@ -9,6 +10,9 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 #include <glm/gtc/matrix_transform.hpp>
 #include <cmath>
 using namespace glm;
+
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include "controls.hpp"
 #include "nibbles\globals.hpp"
@@ -24,89 +28,63 @@ glm::mat4 getProjectionMatrix(){
 	return ProjectionMatrix;
 }
 
-
-// Initial position : on +Z
-glm::vec3 position = glm::vec3( 0, 0, 5 ); 
-// Initial horizontal angle : toward -Z
-float horizontalAngle = 3.14f;
-// Initial vertical angle : none
-float verticalAngle = 0.0f;
 // Initial Field of View
-float initialFoV = 45.0f;
+static float myinitialFoV = 45.0f;
 
-float speed = 3.0f; // 3 units / second
-float mouseSpeed = 0.005f;
+static float zoom = 1;
 
+static float myspeed = 10.0f;
+static double mylasttime = 0;
 
+static float period = 12; // can change this to whatever you want
+static float curve = 4; //curve intensity; this can also be changed, but 4 seems good to me
+static float size = -5;
+static float viewDist = 0;
 
 void computeMatricesFromInputs(){
 
-	// glfwGetTime is called only once, the first time this function is called
-	static double lastTime = glfwGetTime();
-
 	// Compute time difference between current and last frame
 	double currentTime = glfwGetTime();
-	float deltaTime = float(currentTime - lastTime);
+	float deltaTime = float(glfwGetTime() - mylasttime);
 
-	// Get mouse position
+    // Get mouse position
 	double xpos, ypos;
+    int xsize, ysize;
 	glfwGetCursorPos(window, &xpos, &ypos);
+    glfwGetWindowSize(window, &xsize, &ysize);
 
-	// Reset mouse position for next frame
-	//glfwSetCursorPos(window, 1024/2, 768/2);
+    xpos -= xsize/2;
+    ypos -= ysize/2;
+    xpos = 2*xpos/xsize;
+    ypos = 2*ypos/ysize;
 
-	// Compute new orientation
-	horizontalAngle += mouseSpeed * float(1024/2 - xpos );
-	verticalAngle   += mouseSpeed * float( 768/2 - ypos );
-
-	// Direction : Spherical coordinates to Cartesian coordinates conversion
-	glm::vec3 direction(
-		cos(verticalAngle) * sin(horizontalAngle), 
-		sin(verticalAngle),
-		cos(verticalAngle) * cos(horizontalAngle)
-	);
-	
-	// Right vector
-	glm::vec3 right = glm::vec3(
-		sin(horizontalAngle - 3.14f/2.0f), 
-		0,
-		cos(horizontalAngle - 3.14f/2.0f)
-	);
-	
-	// Up vector
-	glm::vec3 up = glm::cross( right, direction );
-
-	// Move forward
-	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS){
-		position += direction * deltaTime * speed;
+	// Zoom in
+	if (glfwGetKey( window, GLFW_KEY_W ) == GLFW_PRESS){
+		zoom -= deltaTime * myspeed;
 	}
-	// Move backward
-	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS){
-		position -= direction * deltaTime * speed;
-	}
-	// Strafe right
-	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
-		position += right * deltaTime * speed;
-	}
-	// Strafe left
-	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
-		position -= right * deltaTime * speed;
+	// Zoom out
+	if (glfwGetKey( window, GLFW_KEY_S ) == GLFW_PRESS){
+		zoom += deltaTime * myspeed;
 	}
 
-	float size = player->energy;
-	float scalar = int(size) + pow((size - int(size)),2); //scalar for view
+    if(size != player->energy){
+        size = player->energy;
+        float temp = period*int(size/period);
+        viewDist =  temp + (pow((size-temp),curve))/(pow(period,(curve-1))) + player->MIN_SIZE;
+    }
+    float cameradistance = viewDist + zoom;
 
-	float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
+	float FoV = myinitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 100.0f);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
-								position,           // Camera is here
-								position+direction, // and looks here : at the same position, plus "direction"
-								up                  // Head is up (set to 0,-1,0 to look upside-down)
+								player->getGLCenter() + glm::vec3(0,cameradistance,0), // Camera is here
+								player->getGLCenter(), //focus destination
+								glm::vec3(0,0,-1)      //up
 						   );
 
 	// For the next frame, the "last time" will be "now"
-	lastTime = currentTime;
+	mylasttime = currentTime;
 }

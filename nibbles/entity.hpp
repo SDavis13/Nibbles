@@ -32,7 +32,8 @@ public:
     void update();
     virtual void initialize(int type);
     virtual void behavior();
-	b2Vec2 getCenter();
+	b2Vec2 getWorldCenter();
+    glm::vec3 getGLCenter();
 };
 
 #endif

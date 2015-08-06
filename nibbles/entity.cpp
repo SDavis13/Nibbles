@@ -29,6 +29,11 @@ void Entity::behavior(){}
 
 void Entity::initialize(int type){}
 
-b2Vec2 Entity::getCenter(){
+b2Vec2 Entity::getWorldCenter(){
 	return primeBody->GetWorldCenter();
+}
+
+glm::vec3 Entity::getGLCenter(){
+    b2Vec2 location = primeBody->GetWorldCenter();
+	return glm::vec3(location.x, 0, location.y);
 }
