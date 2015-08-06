@@ -47,8 +47,8 @@ int main( void )
     Nibbler* nibbles = player;
     Entity myLight(glm::vec3(0,10,0), glm::vec3(0,1,0), 0, glm::vec3(1));
     LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
-    Debris myDebris1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
-    Part pCanister(myDebris1, canister, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(0.1));
+    Debris myDebris1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(0.1));
+    Part pCanister(myDebris1, canister, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
 
     entities.push_back(nibbles);
     entities.push_back(&myLight);
@@ -167,12 +167,15 @@ int main( void )
             entities[i]->render();
         }
 
+        /*
         b2Body* bodies = universe->GetBodyList();
         while(bodies->GetNext() != NULL){
             if(bodies != player->primeBody){
                 bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetWorldCenter()) ), true);
             }
+            bodies = bodies->GetNext();
         }
+        */
 
         if(framenumber%1024 == 0){
             framenumber--;
