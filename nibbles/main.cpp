@@ -41,17 +41,17 @@ int main( void )
     std::vector<Entity*> entities;
     
     Mesh light("nibblercorona.obj");
-    Mesh tear("tearshot.obj");
+    Mesh canister("energycanister.obj");
 
     Nibbler* nibbles = player;
-    Entity myLight(glm::vec3(0,7,0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Entity myLight(glm::vec3(0,10,0), glm::vec3(0,1,0), 0, glm::vec3(1));
     LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
-    Entity eTearShot1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
-    Part tearShot(eTearShot1, tear, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Entity myDebris1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Part pCanister(myDebris1, canister, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(0.1));
 
     entities.push_back(nibbles);
     entities.push_back(&myLight);
-    entities.push_back(&eTearShot1);
+    entities.push_back(&myDebris1);
 
     nibbles->initialize(0);
 
@@ -102,7 +102,7 @@ int main( void )
 			lastPrint += 1.0;
             //printf("%f,%f,%f\n",sunandmoon.lightColor.r,sunandmoon.lightColor.g,sunandmoon.lightColor.b);
 		}
-        //universe->Step((currentTime-lastTime)/1000, 
+        universe->Step((currentTime-lastTime)/1000, 6, 3);
 
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -163,6 +163,13 @@ int main( void )
 
         for(int i = 0; i < entities.size(); ++i){
             entities[i]->render();
+        }
+
+        b2Body* bodies = universe->GetBodyList();
+        while(bodies->GetNext() != NULL){
+            if(bodies != player->primeBody){
+                bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetWorldCenter()) ), true);
+            }
         }
 
         if(framenumber%1024 == 0){
