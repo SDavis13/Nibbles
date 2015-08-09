@@ -53,6 +53,10 @@ void computeMatricesFromInputs(){
 	glfwGetCursorPos(window, &xpos, &ypos);
     glfwGetWindowSize(window, &xsize, &ysize);
 
+    if(xpos > 800){
+        int examplethingamajig = 3;
+    }
+
 	// Zoom in
 	if (glfwGetKey( window, GLFW_KEY_W ) == GLFW_PRESS){
 		zoom -= deltaTime * myspeed;
@@ -65,7 +69,7 @@ void computeMatricesFromInputs(){
     if(size != player->energy){
         size = player->energy;
         float temp = period*int(size/period);
-        viewDist =  temp + (pow((size-temp),curve))/(pow(period,(curve-1))) + player->MIN_SIZE;
+        viewDist = ( temp + (pow((size-temp),curve))/(pow(period,(curve-1))) ) + player->MIN_SIZE*2;
     }
     float cameradistance = viewDist + zoom;
 

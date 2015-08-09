@@ -9,7 +9,6 @@
 class Nibbler : public Entity
 {	
 public:
-    static const int MAX_THRUST = 5;
     static const int MIN_SIZE = 1;
 	glm::vec2 previouspos;
 	glm::vec2 prepreviouspos;
