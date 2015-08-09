@@ -17,24 +17,28 @@ void Debris::initialize(int type){
 		path = "debris1.obj";
         fixDef.density = 1;
         fixDef.friction = 0.4;
+		hp = 0.1f;
         energy = 0.1;
 		break;
 	case DEBRIS2:
 		path = "debris2.obj";
         fixDef.density = 1.2;
         fixDef.friction = 0.3;
+		hp = 0.1f;
         energy = 0.1;
 		break;
 	case DEBRIS3:
 		path = "debris3.obj";
         fixDef.density = 0.9;
         fixDef.friction = 0.45;
+		hp = 0.1f;
         energy = 0.1;
 		break;
 	case CANISTER:
 		path = "energycanister.obj";
         fixDef.density = 0.2;
         fixDef.friction = 0.2;
+		hp = 0.5f;
         energy = 2;
 		break;
     default:
@@ -53,6 +57,7 @@ void Debris::initialize(int type){
     std::vector<b2Shape*> shapes = debrisPart->computeShapes(false, 0);
     debrisPart->initialize(shapes, fixDef, bodDef);
     primeBody = debrisPart->body;
+	primeBody->SetUserData(this);
     mass = primeBody->GetMass();
     physValid = true;
 }

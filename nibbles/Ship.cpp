@@ -8,9 +8,11 @@ void Ship::initialize(int type){
     switch(type){
     case CONESHIP:
         shipMesh = Mesh("coneship.obj");
+		hp = 5.0f;
         break;
     case DRONE:
         shipMesh = Mesh("drone1.obj");
+		hp = 2.0f;
         break;
     default: //DRONE
         shipMesh = Mesh("drone1.obj");

@@ -18,11 +18,13 @@ void Nibbler::initialize(int type){
     bodDef.fixedRotation = true;
     bodDef.position = b2Vec2(position.x, position.z);
     bodDef.angle = angle*M_PI/180;
+	//add linear dampening to control max speed
     std::vector<b2Shape*> shapes = nibblerPart->computeShapes(false, 0);
     nibblerPart->initialize(shapes, fixDef, bodDef);
     primeBody = nibblerPart->body;
 	primeBody->SetUserData(this);
     mass = primeBody->GetMass();
+	hp = 10.0f;
     energy = MIN_SIZE;
     physValid = true;
 }

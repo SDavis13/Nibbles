@@ -2,6 +2,8 @@
 #ifndef CONTACTLISTENER_HPP
 #define CONTACTLISTENER_HPP
 
+#include <Box2D/Dynamics/b2WorldCallbacks.h>
+
 class ContactListener : public b2ContactListener
 {
 //b2ContactListener
