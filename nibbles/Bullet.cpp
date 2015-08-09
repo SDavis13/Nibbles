@@ -1,6 +1,7 @@
 #include "Bullet.hpp"
 #include "Mesh.hpp"
 #include "Part.hpp"
+#include "Nibbler.hpp"
 
 void Bullet::initialize(int type){
     std::string path = "";
@@ -26,5 +27,10 @@ void Bullet::initialize(int type){
     primeBody = bulletPart->body;
 }
 void Bullet::behavior(){
-
+	//only use when starting bullet's movement after firing
+	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();
+	temp.x*=maxThrust;
+	temp.y*=maxThrust;
+	//move in direction of nibblers
+	primeBody->ApplyForceToCenter(temp, true);
 }
