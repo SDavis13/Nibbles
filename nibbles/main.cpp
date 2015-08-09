@@ -167,7 +167,7 @@ int main( void )
         }
 
         b2Body* bodies = universe->GetBodyList();
-        while(bodies->GetNext() != NULL){
+        while(bodies != NULL){
             if(bodies != player->primeBody){
                 bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetWorldCenter()) ), true);
             }
