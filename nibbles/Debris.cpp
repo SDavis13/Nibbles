@@ -43,6 +43,7 @@ void Debris::initialize(int type){
         energy = 0.1;
         break;
 	}
+	hit = false;
     fixDef.restitution = 0.7;
     Mesh debrisMesh(path.c_str());
     Part* debrisPart = new Part(*this, debrisMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));

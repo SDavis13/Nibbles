@@ -16,7 +16,7 @@ void Ship::initialize(int type){
         shipMesh = Mesh("drone1.obj");
         break;
     }
-    
+    hit = false;
     Part* shipPart = new Part(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(shipPart);
 	b2FixtureDef fixDef;
@@ -26,6 +26,7 @@ void Ship::initialize(int type){
     std::vector<b2Shape*> shapes = shipPart->computeShapes(true, 0);
     shipPart->initialize(shapes, fixDef, bodDef);
     primeBody = shipPart->body;
+	primeBody->SetUserData(this);
 }
 void Ship::behavior(){
 	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();

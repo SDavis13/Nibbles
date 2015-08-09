@@ -20,6 +20,7 @@ void Nibbler::initialize(int type){
     std::vector<b2Shape*> shapes = nibblerPart->computeShapes(true, 0);
     nibblerPart->initialize(shapes, fixDef, bodDef);
     primeBody = nibblerPart->body;
+	primeBody->SetUserData(this);
     mass = primeBody->GetMass();
     energy = MIN_SIZE;
     physValid = true;

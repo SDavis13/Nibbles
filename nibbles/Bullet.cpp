@@ -13,6 +13,7 @@ void Bullet::initialize(int type){
         path = "tearshot.obj";
         break;
     }
+	hit = false;
     Mesh bulletMesh(path.c_str());
     Part* bulletPart = new Part(*this, bulletMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(bulletPart);
@@ -25,6 +26,7 @@ void Bullet::initialize(int type){
     std::vector<b2Shape*> shapes = bulletPart->computeShapes(true, 0);
     bulletPart->initialize(shapes, fixDef, bodDef);
     primeBody = bulletPart->body;
+	primeBody->SetUserData(this);
 }
 void Bullet::behavior(){
 	//only use when starting bullet's movement after firing

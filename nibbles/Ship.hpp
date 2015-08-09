@@ -12,6 +12,8 @@ class Ship : Entity
 public:
 	float speed;
 	float maxThrust;
+	float hp;
+	bool hit;
     Ship(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale) {}
     Ship() : Entity() {}
