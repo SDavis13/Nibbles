@@ -22,6 +22,7 @@ void Nibbler::initialize(int type){
     primeBody = nibblerPart->body;
     mass = primeBody->GetMass();
     energy = MIN_SIZE;
+    physValid = true;
 }
 b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
     b2Vec2 difference = primeBody->GetWorldCenter() - objLoc;

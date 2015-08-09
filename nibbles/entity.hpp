@@ -3,7 +3,7 @@
 #define ENTITY_HPP
 
 #include <vector>
-
+#include <iostream>
 #include <glm/glm.hpp>
 
 #include <Box2D/Dynamics/b2Body.h>
@@ -27,7 +27,7 @@ public:
             : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false), mass(0), energy(0) {}
     Entity() : position(glm::vec3(0)), rotationAxis(glm::vec3(0,1,0)), angle(0), scale(glm::vec3(1)), physValid(false) {}
     ~Entity();
-    //create a copy constructor
+    //Entity(const Entity& other) { printf("\nCopying entity at %f,%f,%f", position.x, position.y, position.z); }
     void addPart(Part* part);
     void render(glm::mat4 transform);
     void render();

@@ -35,7 +35,7 @@ public:
                     scale(relScale), mesh(mesh), valid(true), physValid(false) {source.addPart(this); }
     Part() : whole(defaultEntity), valid(false), physValid(false) {}
     ~Part() { if(physValid) universe->DestroyBody(body); }
-    //create a copy constructor
+    //Part(const Part& other) { printf("Copying Part"); }
     void render(glm::mat4& model) const;
     void render() const;
     glm::mat4 generateTransform() const;

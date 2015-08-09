@@ -46,7 +46,6 @@ void Debris::initialize(int type){
     fixDef.restitution = 0.7;
     Mesh debrisMesh(path.c_str());
     Part* debrisPart = new Part(*this, debrisMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    parts.push_back(debrisPart);
     bodDef.type = b2_dynamicBody;
     bodDef.position = b2Vec2(position.x, position.z);
     bodDef.angle = angle*M_PI/180;
@@ -54,6 +53,7 @@ void Debris::initialize(int type){
     debrisPart->initialize(shapes, fixDef, bodDef);
     primeBody = debrisPart->body;
     mass = primeBody->GetMass();
+    physValid = true;
 }
 int Debris::randDebrisType(){
 	srand(time(NULL));
