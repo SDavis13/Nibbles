@@ -22,6 +22,8 @@ public:
     b2Body* primeBody;
     float mass;
     float energy;
+	float hp;
+	int m_contacting;
     unsigned short centerMode; //unused at the moment
     Entity(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false), mass(0), energy(0) {}
@@ -34,8 +36,11 @@ public:
     void update();
     virtual void initialize(int type);
     virtual void behavior();
+	virtual string getLeftover();
 	b2Vec2 getWorldCenter();
     glm::vec3 getGLCenter();
+	void startContact() { m_contacting++; }
+	void endContact() { m_contacting--; }
 };
 
 #endif

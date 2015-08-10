@@ -18,7 +18,7 @@ void Ship::initialize(int type){
         shipMesh = Mesh("drone1.obj");
         break;
     }
-    hit = false;
+    m_contacting = 0;
     Part* shipPart = new Part(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(shipPart);
 	b2FixtureDef fixDef;

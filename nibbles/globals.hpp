@@ -77,4 +77,6 @@ int initializeOGLstuff();
 
 int floatSign(float val);
 
+MyContactListener myContactListenerInstance;
+
 #endif

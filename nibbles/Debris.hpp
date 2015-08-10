@@ -13,8 +13,6 @@
 class Debris : public Entity
 {
 public:
-	float hp;
-	bool hit;
     Debris(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale) {}
     Debris() : Entity() {}

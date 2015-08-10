@@ -29,6 +29,8 @@ using namespace glm;
 #include "Nibbler.hpp"
 #include "Debris.hpp"
 
+MyContactListener myContactListenerInstance;
+
 //#define CRTDBG_MAP_ALLOC
 //#include <crtdbg.h>
 
