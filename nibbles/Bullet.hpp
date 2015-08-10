@@ -13,10 +13,10 @@ public:
 	b2Vec2 initialVelocity;
 	float angle;
 	float maxThrust;
-	float hp = 0.1f;
+	float hp;
 	bool hit;
 	Bullet(glm::vec3 position, glm::vec3 rotationAxis, float angle, b2Vec2 velocity ) //overriding scale
-            : Entity(position, rotationAxis, angle, glm::vec3 (0.1f, 0.1f, 0.1f)), initialVelocity(velocity) {}
+            : Entity(position, rotationAxis, angle, glm::vec3 (0.1f, 0.1f, 0.1f)), initialVelocity(velocity), hp(0.1) {}
     Bullet() : Entity() {}
     virtual void initialize(int type);
     virtual void behavior();
