@@ -50,3 +50,6 @@ void Nibbler::applyThrust(b2Vec2 destination){
     }
     primeBody->ApplyLinearImpulse(difference, b2Vec2(0,0), true);
 }
+void Nibbler::destructionEvent(){
+	//end game some how
+}

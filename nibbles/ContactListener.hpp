@@ -6,7 +6,7 @@
 
 class ContactListener : public b2ContactListener
 {
-//b2ContactListener
+	//b2ContactListener
     // Called when two fixtures begin to touch
     virtual void BeginContact(b2Contact* contact);
   

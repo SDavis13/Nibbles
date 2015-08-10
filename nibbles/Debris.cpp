@@ -67,3 +67,6 @@ int Debris::randDebrisType(){
 	return (rand() % 3 + 1);
 }
 void Debris::behavior(){}
+void Debris::destructionEvent(){
+	//create smaller debris or destroy altogeher
+}

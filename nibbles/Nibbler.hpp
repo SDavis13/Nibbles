@@ -17,9 +17,9 @@ public:
     Nibbler() : Entity() {}
     virtual void initialize(int type);
     virtual void behavior();
-	virtual void destructionEvent();
 	b2Vec2 getGravity(float objMass, b2Vec2 objLoc);
 	void applyThrust(b2Vec2 destination);
+	virtual void destructionEvent();
 };
 
 #endif

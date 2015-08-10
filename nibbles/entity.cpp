@@ -43,6 +43,8 @@ void Entity::behavior(){}
 
 void Entity::initialize(int type){}
 
+void Entity::destructionEvent() {}
+
 b2Vec2 Entity::getWorldCenter(){
 	return primeBody->GetWorldCenter();
 }

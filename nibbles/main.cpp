@@ -29,8 +29,6 @@ using namespace glm;
 #include "Nibbler.hpp"
 #include "Debris.hpp"
 
-MyContactListener myContactListenerInstance;
-
 //#define CRTDBG_MAP_ALLOC
 //#include <crtdbg.h>
 
@@ -163,7 +161,7 @@ int main( void )
 
         theLight.setUpLight();
 
-        for(int i = 0; i < entities.size(); ++i){
+        for(unsigned int i = 0; i < entities.size(); ++i){
             entities[i]->update();
             entities[i]->render();
         }
@@ -176,7 +174,7 @@ int main( void )
             }
             bodies = bodies->GetNext();
 			if(temp->getHP() < 0){
-				temp->destructionEvent();
+				//temp->destructionEvent();
 			}
         }
 

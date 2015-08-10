@@ -29,5 +29,7 @@ void Bullet::initialize(int type){
     primeBody = bulletPart->body;
 	primeBody->SetUserData((Entity*) this);
 }
-void Bullet::behavior(){
+void Bullet::behavior(){}
+void Bullet::destructionEvent(){
+	//pretty much nothing, shower of sparks?
 }

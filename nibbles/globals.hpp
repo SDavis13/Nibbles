@@ -31,6 +31,7 @@ using namespace glm;
 #endif
 
 class Nibbler;
+class ContactListener;
 
 #define COUNTERCLOCKWISE 1
 #define COLINEAR 0
@@ -73,10 +74,11 @@ COMPILE_HERE GLuint elementbuffer;
 COMPILE_HERE GLuint Texture;
 COMPILE_HERE GLuint TextureID;
 
+COMPILE_HERE ContactListener* ContactListenerInstance;
+
 int initializeOGLstuff();
 
 int floatSign(float val);
 
-MyContactListener myContactListenerInstance;
 
 #endif

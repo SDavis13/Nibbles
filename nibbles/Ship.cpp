@@ -54,3 +54,6 @@ void Ship::behavior(){
 	//
 	primeBody->ApplyForceToCenter(temp, true);
 }
+void Ship::destructionEvent(){
+	//request debris from factory?
+}
