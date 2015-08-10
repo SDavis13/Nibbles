@@ -41,6 +41,8 @@ static float curve = 4; //curve intensity; this can also be changed, but 4 seems
 static float size = -5;
 static float viewDist = 0;
 
+static unsigned int myTempVar = 0;
+
 void computeMatricesFromInputs(){
 
 	// Compute time difference between current and last frame
@@ -69,22 +71,9 @@ void computeMatricesFromInputs(){
     if(size != player->energy){
         size = player->energy;
         float temp = period*int(size/period);
-        viewDist = ( temp + (pow((size-temp),curve))/(pow(period,(curve-1))) ) + player->MIN_SIZE*2;
+        viewDist = ( temp + (pow((size-temp),curve))/(pow(period,(curve-1))) ) + player->MIN_SIZE*3;
     }
-    float cameradistance = viewDist + zoom;
-
-	int minDim;
-	if(xsize > ysize){
-		minDim = ysize;
-	}else{
-		minDim = xsize;
-	}
-    xpos -= xsize/2;//center at 0
-    ypos -= ysize/2;
-    xpos = size*xpos/minDim;//scale to GL coordinates
-    ypos = size*ypos/minDim;
-
-    player->applyThrust(b2Vec2(xpos,ypos));
+    float cameraDistance = viewDist + zoom;
 
 	float FoV = myinitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
@@ -92,10 +81,35 @@ void computeMatricesFromInputs(){
 	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 100.0f);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
-								player->getGLCenter() + glm::vec3(0,cameradistance,0), // Camera is here
-								player->getGLCenter(), //focus destination
+								/*player->getGLCenter() +*/ glm::vec3(0,cameraDistance,0), // Camera is here
+								/*player->getGLCenter()*/glm::vec3(0), //focus destination
 								glm::vec3(0,0,-1)      //up
 						   );
+
+    xpos = 2*xpos/xsize - 1;//scale to GL coordinates
+    ypos = 2*ypos/ysize - 1;
+    glm::vec4 rayClip(xpos, ypos, -1.0, 1.0f);
+
+    glm::vec4 rayEye = ProjectionMatrix._inverse() * rayClip;
+    rayEye = glm::vec4 (rayEye.x, rayEye.y, -1.0f, 0.0f);
+
+    glm::vec4 rayTemp = ViewMatrix._inverse() * rayEye;
+    glm::vec3 rayWorld = glm::vec3(rayTemp.x, rayTemp.y, rayTemp.z);
+    rayWorld = glm::normalize(rayWorld);
+
+    float scalar = cameraDistance/rayTemp.y;
+    b2Vec2 pointPosition(rayTemp.x*scalar, rayTemp.z*scalar);
+
+    /*
+    if(myTempVar%2048 == 0){
+        printf("\n%f,%f",xpos,ypos);
+        printf("\n%f,%f,%f", rayWorld.z, rayWorld.y, rayWorld.x);
+    }else{
+        ++myTempVar;
+    }
+    */
+
+    player->applyThrust(pointPosition);
 
 	// For the next frame, the "last time" will be "now"
 	mylasttime = currentTime;
