@@ -18,6 +18,7 @@ public:
     Bullet() : Entity() {}
     virtual void initialize(int type);
     virtual void behavior();
+	virtual void destructionEvent();
 };
 
 #endif

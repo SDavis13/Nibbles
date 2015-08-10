@@ -17,6 +17,7 @@ public:
             : Entity(position, rotationAxis, angle, scale) {}
     Debris() : Entity() {}
     virtual void initialize(int type);
+	virtual void destructionEvent();
 	static int randDebrisType();
     virtual void behavior();
 };

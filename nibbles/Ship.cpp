@@ -28,7 +28,7 @@ void Ship::initialize(int type){
     std::vector<b2Shape*> shapes = shipPart->computeShapes(true, 0);
     shipPart->initialize(shapes, fixDef, bodDef);
     primeBody = shipPart->body;
-	primeBody->SetUserData(this);
+	primeBody->SetUserData((Entity*) this);
 }
 void Ship::behavior(){
 	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();

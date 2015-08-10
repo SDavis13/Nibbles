@@ -44,7 +44,7 @@ void Debris::initialize(int type){
     default:
         path = "debris1.obj";
         fixDef.density = 1;
-		hp = 0.1f;
+		hp = 0.1;
         energy = 0.1;
         break;
 	}
@@ -58,7 +58,7 @@ void Debris::initialize(int type){
     std::vector<b2Shape*> shapes = debrisPart->computeShapes(false, 0);
     debrisPart->initialize(shapes, fixDef, bodDef);
     primeBody = debrisPart->body;
-	primeBody->SetUserData(this);
+	primeBody->SetUserData((Entity*) this);
     mass = primeBody->GetMass();
     physValid = true;
 }

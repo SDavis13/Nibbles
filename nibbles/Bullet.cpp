@@ -27,7 +27,7 @@ void Bullet::initialize(int type){
     std::vector<b2Shape*> shapes = bulletPart->computeShapes(true, 0);
     bulletPart->initialize(shapes, fixDef, bodDef);
     primeBody = bulletPart->body;
-	primeBody->SetUserData(this);
+	primeBody->SetUserData((Entity*) this);
 }
 void Bullet::behavior(){
 }

@@ -36,6 +36,7 @@ public:
     void update();
     virtual void initialize(int type);
     virtual void behavior();
+	virtual void destructionEvent();
 	b2Vec2 getWorldCenter();
     glm::vec3 getGLCenter();
 	float getHP();
