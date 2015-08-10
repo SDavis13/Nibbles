@@ -36,7 +36,6 @@ public:
     void update();
     virtual void initialize(int type);
     virtual void behavior();
-	virtual string getLeftover();
 	b2Vec2 getWorldCenter();
     glm::vec3 getGLCenter();
 	void startContact() { m_contacting++; }
