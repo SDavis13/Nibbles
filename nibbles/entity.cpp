@@ -51,3 +51,7 @@ glm::vec3 Entity::getGLCenter(){
     b2Vec2 location = primeBody->GetWorldCenter();
 	return glm::vec3(location.x, 0, location.y);
 }
+
+float Entity::getHP(){
+	return hp;
+}

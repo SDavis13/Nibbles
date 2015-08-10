@@ -44,6 +44,7 @@ void Debris::initialize(int type){
     default:
         path = "debris1.obj";
         fixDef.density = 1;
+		hp = 0.1f;
         energy = 0.1;
         break;
 	}

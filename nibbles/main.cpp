@@ -170,6 +170,11 @@ int main( void )
 
         b2Body* bodies = universe->GetBodyList();
         while(bodies != NULL){
+			void* temp = bodies->GetUserData();
+
+			if(){
+
+			}
             if(bodies != player->primeBody){
                 bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetWorldCenter()) ), true);
             }
@@ -208,4 +213,7 @@ int main( void )
 	glfwTerminate();
 
 	return 0;
+}
+void entityMangaer(b2Body* bodlist){
+
 }

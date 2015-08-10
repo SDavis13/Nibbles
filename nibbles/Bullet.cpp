@@ -13,6 +13,7 @@ void Bullet::initialize(int type){
         path = "tearshot.obj";
         break;
     }
+	hp = 0.1f;
 	m_contacting = 0;
     Mesh bulletMesh(path.c_str());
     Part* bulletPart = new Part(*this, bulletMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
