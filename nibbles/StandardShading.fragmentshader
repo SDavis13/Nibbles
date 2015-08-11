@@ -13,6 +13,7 @@ uniform mat4 MV;
 uniform mat4 L;
 uniform vec3 LightPosition_worldspace;
 uniform vec3 lightColor;
+uniform float opacity;
 
 void main(){
 
@@ -58,4 +59,5 @@ void main(){
 		// Specular : reflective highlight, like a mirror
 		MaterialSpecularColor * lightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
 
+	gl_FragColor.a = opacity;
 }

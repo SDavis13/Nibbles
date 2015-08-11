@@ -62,6 +62,8 @@ COMPILE_HERE GLuint LightMatrixID;
 COMPILE_HERE GLuint LightID;
 COMPILE_HERE GLuint LightColorID;
 
+COMPILE_HERE GLuint OpacityID;
+
 COMPILE_HERE GLuint vertexPosition_modelspaceID;
 COMPILE_HERE GLuint vertexUVID;
 COMPILE_HERE GLuint vertexNormal_modelspaceID;

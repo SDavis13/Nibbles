@@ -30,6 +30,8 @@ glm::mat4 Part::generateTransform() const{
 void Part::render(glm::mat4& model) const{
 	mvp = projectionMatrix * viewMatrix * model;
 
+    glUniform1f(OpacityID, opacity);
+
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
     glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &model[0][0]);
 

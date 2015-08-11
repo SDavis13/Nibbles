@@ -18,7 +18,7 @@ int initializeOGLstuff(){
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Tutorial 09 - Rendering several models", NULL, NULL);
+	window = glfwCreateWindow( 1024, 768, "SPACE NIBBLES", NULL, NULL);
 	if( window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window.\n" );
 		glfwTerminate();
@@ -71,6 +71,8 @@ int initializeOGLstuff(){
 
     // Get a handle for our "LightPosition" uniform
     LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+
+    OpacityID = glGetUniformLocation(programID, "opacity");
     
     b2Vec2 uniGravity(0,0);
     universe = new b2World(uniGravity);
