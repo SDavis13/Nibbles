@@ -40,14 +40,11 @@ int main( void )
     }
 
     std::vector<Entity*> entities;
-    
-    Mesh light("nibblercorona.obj");
 
     Nibbler* nibbles = player;
-    Entity myLight(glm::vec3(0,0,10), glm::vec3(0,0,1), 0, glm::vec3(1));
-    LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(1), glm::vec3(0));
     Debris myDebris1(glm::vec3(-2,-2,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
+    entities.push_back(background);
     entities.push_back(nibbles);
     entities.push_back(&myDebris1);
 
@@ -158,7 +155,7 @@ int main( void )
 			(void*)0                          // array buffer offset
 		);
 
-        theLight.setUpLight();
+        light->setUpLight();
 
         for(unsigned int i = 0; i < entities.size(); ++i){
             entities[i]->update();

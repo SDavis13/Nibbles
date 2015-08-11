@@ -16,6 +16,7 @@ using namespace glm;
 #include "controls.hpp"
 #include "nibbles\globals.hpp"
 #include "nibbles\Nibbler.hpp"
+#include "nibbles\Entity.hpp"
 
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
@@ -76,11 +77,13 @@ void computeMatricesFromInputs(){
 
 	float FoV = myinitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
+    glm::vec3 cameraPos = /*player->getGLCenter() +*/ glm::vec3(0,0,cameraDistance);
+
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 100.0f);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
-								/*player->getGLCenter() +*/ glm::vec3(0,0,cameraDistance), // Camera is here
+								cameraPos, // Camera is here
 								/*player->getGLCenter()*/glm::vec3(0), //focus destination
 								glm::vec3(0,1,0)      //up
 						   );
@@ -98,6 +101,10 @@ void computeMatricesFromInputs(){
 
     float scalar = cameraDistance/rayTemp.z;
     b2Vec2 pointPosition(rayTemp.x*scalar, rayTemp.y*scalar);
+
+    theLight->position = cameraPos;
+    background->scale.x = cameraDistance;
+    background->scale.y = cameraDistance;
 
     /*
     if(myTempVar%2048 == 0){
