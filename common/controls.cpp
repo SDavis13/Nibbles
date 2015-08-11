@@ -80,13 +80,13 @@ void computeMatricesFromInputs(){
 	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 100.0f);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
-								/*player->getGLCenter() +*/ glm::vec3(0,cameraDistance,0), // Camera is here
+								/*player->getGLCenter() +*/ glm::vec3(0,0,cameraDistance), // Camera is here
 								/*player->getGLCenter()*/glm::vec3(0), //focus destination
-								glm::vec3(0,0,-1)      //up
+								glm::vec3(0,1,0)      //up
 						   );
 
     xpos = 2*xpos/xsize - 1;//scale to GL coordinates
-    ypos = 2*ypos/ysize - 1;
+    ypos = -2*ypos/ysize + 1;
     glm::vec4 rayClip(xpos, ypos, -1.0, 1.0f);
 
     glm::vec4 rayEye = ProjectionMatrix._inverse() * rayClip;
@@ -96,8 +96,8 @@ void computeMatricesFromInputs(){
     glm::vec3 rayWorld = glm::vec3(rayTemp.x, rayTemp.y, rayTemp.z);
     rayWorld = glm::normalize(rayWorld);
 
-    float scalar = cameraDistance/rayTemp.y;
-    b2Vec2 pointPosition(rayTemp.x*scalar, rayTemp.z*scalar);
+    float scalar = cameraDistance/rayTemp.z;
+    b2Vec2 pointPosition(rayTemp.x*scalar, rayTemp.y*scalar);
 
     /*
     if(myTempVar%2048 == 0){

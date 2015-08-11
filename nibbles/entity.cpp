@@ -34,7 +34,7 @@ void Entity::update(){
         angle = (primeBody->GetAngle())*180/M_PI;
         b2Vec2 pos2d = primeBody->GetPosition();
         position.x = pos2d.x;
-        position.z = pos2d.y;
+        position.y = pos2d.y;
         behavior();
     }
 }

@@ -53,15 +53,15 @@ std::vector<b2Shape*> Part::computeShapes(bool circular, float offset){
     std::vector<b2Shape*> shapes;
     if(circular){
         b2CircleShape* shape = new b2CircleShape();
-        shape->m_radius = mesh.getRadius()*fmax(scale.x,scale.y)*fmax(whole.scale.x,whole.scale.z) + offset;
+        shape->m_radius = mesh.getRadius()*fmax(scale.x,scale.y)*fmax(whole.scale.x,whole.scale.y) + offset;
         shapes.push_back(shape);
     }else{
         std::vector<std::vector<b2Vec2> > vertices = mesh.getHullPoly();
-        if(!(scale.x == 1 && scale.z == 1 && whole.scale.x == 1 && whole.scale.z == 1)){
+        if(!(scale.x == 1 && scale.y == 1 && whole.scale.x == 1 && whole.scale.y == 1)){
             for(int i = 0; i < vertices.size(); ++i){
                 for(int j = 0; j < vertices[i].size(); ++j){
                     (vertices[i])[j].x *= scale.x*whole.scale.x;
-                    (vertices[i])[j].y *= scale.z*whole.scale.z;
+                    (vertices[i])[j].y *= scale.y*whole.scale.y;
                 }
             }
         }

@@ -27,7 +27,7 @@ public:
     unsigned short centerMode; //unused at the moment
     Entity(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false), mass(0), energy(0), hp(1) {}
-    Entity() : position(glm::vec3(0)), rotationAxis(glm::vec3(0,1,0)), angle(0), scale(glm::vec3(1)), physValid(false), hp(0) {}
+    Entity() : position(glm::vec3(0)), rotationAxis(glm::vec3(0,0,1)), angle(0), scale(glm::vec3(1)), physValid(false), hp(0) {}
     ~Entity();
     //Entity(const Entity& other) { printf("\nCopying entity at %f,%f,%f", position.x, position.y, position.z); }
     void addPart(Part* part);
