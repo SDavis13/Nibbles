@@ -57,5 +57,5 @@ void Ship::behavior(){
 void Ship::destructionEvent(){
 	//request debris from factory?
 }
-void Nibbler::startContact(Entity other, float dmg){}
-void Nibbler::endContact(){}
+void Ship::startContact(Entity* other, float dmg){}
+void Ship::endContact(){}

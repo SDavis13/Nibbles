@@ -12,8 +12,10 @@ void ContactListener::BeginContact(b2Contact* contact)
 	//float damage = sqrt(pow((vlctA.x-vlctB.x),2)+pow((vlctA.y-vlctB.y),2));
 	b2Vec2 temp = vlctA-vlctB;
 	float damage = temp.Length();
-	void* tempA = contact->GetFixtureA()->GetBody()->GetUserData();
-	void* tempB = contact->GetFixtureB()->GetBody()->GetUserData();
+	Entity* tempA = (Entity*)contact->GetFixtureA()->GetBody()->GetUserData();
+	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
+	tempA->startContact(tempB, damage);
+
 	std::cout << "begin/n";
 	//subtract damage from both
 	//if hp < 0, add to destruction list
