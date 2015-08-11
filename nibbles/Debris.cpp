@@ -70,5 +70,8 @@ void Debris::behavior(){}
 void Debris::destructionEvent(){
 	//create smaller debris or destroy altogeher
 }
-void Debris::startContact(Entity* other, float dmg){}
+void Debris::startContact(Entity* other, float dmg){
+	other->applyDmg(dmg);
+	hp-=dmg;
+}
 void Debris::endContact(){}

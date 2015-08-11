@@ -53,5 +53,12 @@ void Nibbler::applyThrust(b2Vec2 destination){
 void Nibbler::destructionEvent(){
 	//end game some how
 }
-void Nibbler::startContact(Entity other, float dmg){}
+void Nibbler::startContact(Entity* other, float dmg){
+	if(other->getHP() > hp){
+	other->applyDmg(dmg);
+	hp-=dmg;
+	}else{
+		energy += other->getEnergy();
+	}
+}
 void Nibbler::endContact(){}

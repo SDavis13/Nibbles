@@ -4,7 +4,7 @@
 
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 
-class ContactListener : public b2ContactListener
+class EntityManager : public b2ContactListener
 {
 	//b2ContactListener
     // Called when two fixtures begin to touch

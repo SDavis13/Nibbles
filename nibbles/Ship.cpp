@@ -57,5 +57,8 @@ void Ship::behavior(){
 void Ship::destructionEvent(){
 	//request debris from factory?
 }
-void Ship::startContact(Entity* other, float dmg){}
+void Ship::startContact(Entity* other, float dmg){
+	other->applyDmg(dmg);
+	hp-=dmg;
+}
 void Ship::endContact(){}

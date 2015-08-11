@@ -40,6 +40,8 @@ public:
 	b2Vec2 getWorldCenter();
     glm::vec3 getGLCenter();
 	float getHP();
+	void applyDmg(float dmg);
+	float getEnergy();
 	virtual void startContact(Entity* other, float dmg) { m_contacting++; }
 	virtual void endContact() { m_contacting--; }
 };

@@ -2,7 +2,7 @@
 
 #include "globals.hpp"
 #include "Nibbler.hpp"
-#include "ContactListener.hpp"
+#include "EntityManager.hpp"
 
 int initializeOGLstuff(){
 
@@ -76,7 +76,7 @@ int initializeOGLstuff(){
     
     b2Vec2 uniGravity(0,0);
     universe = new b2World(uniGravity);
-	ContactListenerInstance = new ContactListener;
+	ContactListenerInstance = new EntityManager;
 	universe->SetContactListener(ContactListenerInstance);
 
     player = new Nibbler(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));

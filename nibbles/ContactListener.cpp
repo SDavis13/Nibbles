@@ -15,7 +15,7 @@ void ContactListener::BeginContact(b2Contact* contact)
 	Entity* tempA = (Entity*)contact->GetFixtureA()->GetBody()->GetUserData();
 	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
 	tempA->startContact(tempB, damage);
-
+	tempB->startContact(tempB, damage);
 	std::cout << "begin/n";
 	//subtract damage from both
 	//if hp < 0, add to destruction list
