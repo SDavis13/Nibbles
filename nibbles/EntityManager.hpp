@@ -20,5 +20,6 @@ class EntityManager : public b2ContactListener
     // Called when two fixtures cease to touch
     virtual void EndContact(b2Contact* contact);
 
+	static Entity *factory(enum type);
 };
 #endif

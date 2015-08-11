@@ -25,7 +25,7 @@ public:
 	float hp;
 	int m_contacting;
     unsigned short centerMode; //unused at the moment
-    Entity(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
+	Entity(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : position(position), rotationAxis(rotationAxis), angle(angle), scale(scale), physValid(false), mass(0), energy(0), hp(1) {}
     Entity() : position(glm::vec3(0)), rotationAxis(glm::vec3(0,0,1)), angle(0), scale(glm::vec3(1)), physValid(false), hp(0) {}
     ~Entity();
