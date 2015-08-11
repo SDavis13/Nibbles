@@ -18,6 +18,8 @@ public:
     virtual void initialize(int type);
     virtual void behavior();
 	virtual void destructionEvent();
+	void Nibbler::startContact(Entity other, float dmg){}
+	void Nibbler::endContact(){}
 };
 
 #endif

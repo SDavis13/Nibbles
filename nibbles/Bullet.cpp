@@ -33,3 +33,5 @@ void Bullet::behavior(){}
 void Bullet::destructionEvent(){
 	//pretty much nothing, shower of sparks?
 }
+void Nibbler::startContact(Entity other, float dmg){}
+void Nibbler::endContact(){}

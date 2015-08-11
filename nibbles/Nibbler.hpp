@@ -20,6 +20,8 @@ public:
 	b2Vec2 getGravity(float objMass, b2Vec2 objLoc);
 	void applyThrust(b2Vec2 destination);
 	virtual void destructionEvent();
+	void Nibbler::startContact(Entity other, float dmg){}
+	void Nibbler::endContact(){}
 };
 
 #endif

@@ -70,3 +70,5 @@ void Debris::behavior(){}
 void Debris::destructionEvent(){
 	//create smaller debris or destroy altogeher
 }
+void Nibbler::startContact(Entity other, float dmg){}
+void Nibbler::endContact(){}

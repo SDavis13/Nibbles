@@ -17,17 +17,17 @@ void Ship::initialize(int type){
     default: //DRONE
         shipMesh = Mesh("drone1.obj");
         break;
-    }
-    m_contacting = 0;
-    Part* shipPart = new Part(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    parts.push_back(shipPart);
+	}
+	m_contacting = 0;
+	Part* shipPart = new Part(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+	parts.push_back(shipPart);
 	b2FixtureDef fixDef;
-    b2BodyDef bodDef;
-    bodDef.type = b2_dynamicBody;
-    bodDef.fixedRotation = true;
-    std::vector<b2Shape*> shapes = shipPart->computeShapes(true, 0);
-    shipPart->initialize(shapes, fixDef, bodDef);
-    primeBody = shipPart->body;
+	b2BodyDef bodDef;
+	bodDef.type = b2_dynamicBody;
+	bodDef.fixedRotation = true;
+	std::vector<b2Shape*> shapes = shipPart->computeShapes(true, 0);
+	shipPart->initialize(shapes, fixDef, bodDef);
+	primeBody = shipPart->body;
 	primeBody->SetUserData((Entity*) this);
 }
 void Ship::behavior(){
@@ -42,13 +42,13 @@ void Ship::behavior(){
 	}
 	else{
 		if(distance > field *3){
-		//pick direction and apply force
-		temp.x*=maxThrust;
-		temp.y*=maxThrust;
+			//pick direction and apply force
+			temp.x*=maxThrust;
+			temp.y*=maxThrust;
 		}else{
-		float holder = temp.x;
-		temp.x = temp.y*maxThrust;
-		temp.y = holder*maxThrust;
+			float holder = temp.x;
+			temp.x = temp.y*maxThrust;
+			temp.y = holder*maxThrust;
 		}
 	}
 	//
@@ -57,3 +57,5 @@ void Ship::behavior(){
 void Ship::destructionEvent(){
 	//request debris from factory?
 }
+void Nibbler::startContact(Entity other, float dmg){}
+void Nibbler::endContact(){}

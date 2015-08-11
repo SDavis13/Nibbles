@@ -57,3 +57,5 @@ glm::vec3 Entity::getGLCenter(){
 float Entity::getHP(){
 	return hp;
 }
+void Entity::startContact(Entity other, float dmg){}
+void Entity::endContact(){}
