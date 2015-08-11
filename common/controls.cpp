@@ -85,8 +85,8 @@ void computeMatricesFromInputs(){
 								glm::vec3(0,1,0)      //up
 						   );
 
-    xpos = 2*xpos/xsize - 1;//scale to GL coordinates
-    ypos = -2*ypos/ysize + 1;
+    xpos = -2*xpos/xsize + 1;//scale to GL coordinates
+    ypos = 2*ypos/ysize - 1;
     glm::vec4 rayClip(xpos, ypos, -1.0, 1.0f);
 
     glm::vec4 rayEye = ProjectionMatrix._inverse() * rayClip;
