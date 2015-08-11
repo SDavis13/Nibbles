@@ -44,12 +44,11 @@ int main( void )
     Mesh light("nibblercorona.obj");
 
     Nibbler* nibbles = player;
-    Entity myLight(glm::vec3(0,10,0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1), glm::vec3(0));
-    Debris myDebris1(glm::vec3(-2,0,-2), glm::vec3(0,1,0), 0, glm::vec3(0.1));
+    Entity myLight(glm::vec3(0,0,10), glm::vec3(0,0,1), 0, glm::vec3(1));
+    LightSource theLight(myLight, light, glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(1), glm::vec3(0));
+    Debris myDebris1(glm::vec3(-2,-2,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
     entities.push_back(nibbles);
-    entities.push_back(&myLight);
     entities.push_back(&myDebris1);
 
     nibbles->initialize(0);

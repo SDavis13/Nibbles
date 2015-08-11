@@ -25,7 +25,7 @@ void Mesh::computeHull(){
     maxRadius = 0;
     for(i = startvertex; i < startvertex + numvertices; ++i){
         //get vertex
-        b2Vec2 vertex(indexed_vertices[i].x, indexed_vertices[i].z);
+        b2Vec2 vertex(indexed_vertices[i].x, indexed_vertices[i].y);
         
         //compute radius
         float curRad = vertex.Length();
