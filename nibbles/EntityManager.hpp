@@ -1,8 +1,15 @@
 #pragma once
-#ifndef CONTACTLISTENER_HPP
-#define CONTACTLISTENER_HPP
+#ifndef ENTITYMANAGER_HPP
+#define ENTITYMANAGER_HPP
 
+#include "Entity.hpp"
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
+
+enum type {
+	BULLET,
+	DEBRIS,
+	SHIP
+};
 
 class EntityManager : public b2ContactListener
 {
@@ -12,5 +19,6 @@ class EntityManager : public b2ContactListener
   
     // Called when two fixtures cease to touch
     virtual void EndContact(b2Contact* contact);
+
 };
 #endif

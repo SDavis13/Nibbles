@@ -73,5 +73,6 @@ void Debris::destructionEvent(){
 void Debris::startContact(Entity* other, float dmg){
 	other->applyDmg(dmg);
 	hp-=dmg;
+	m_contacting++;
 }
-void Debris::endContact(){}
+void Debris::endContact(){ m_contacting--; }

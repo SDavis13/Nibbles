@@ -60,5 +60,6 @@ void Nibbler::startContact(Entity* other, float dmg){
 	}else{
 		energy += other->getEnergy();
 	}
+	 m_contacting++; 
 }
-void Nibbler::endContact(){}
+void Nibbler::endContact(){ m_contacting--; }

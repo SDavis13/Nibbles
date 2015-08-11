@@ -18,8 +18,8 @@ public:
     virtual void initialize(int type);
     virtual void behavior();
 	virtual void destructionEvent();
-	void Ship::startContact(Entity* other, float dmg){}
-	void Ship::endContact(){}
+	virtual void startContact(Entity* other, float dmg);
+	virtual void endContact();
 };
 
 #endif

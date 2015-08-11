@@ -4,11 +4,12 @@
 #include <iostream>
 #include <cmath>
 
-void EntityManager::BeginContact(b2Contact* contact)
+void ContactListener::BeginContact(b2Contact* contact)
 {
 	//should get instance of Entity instead of -> -> a bunch
 	b2Vec2 vlctA = contact->GetFixtureA()->GetBody()->GetLinearVelocity();
 	b2Vec2 vlctB = contact->GetFixtureB()->GetBody()->GetLinearVelocity();
+	//float damage = sqrt(pow((vlctA.x-vlctB.x),2)+pow((vlctA.y-vlctB.y),2));
 	b2Vec2 temp = vlctA-vlctB;
 	float damage = temp.Length();
 	Entity* tempA = (Entity*)contact->GetFixtureA()->GetBody()->GetUserData();
@@ -16,19 +17,12 @@ void EntityManager::BeginContact(b2Contact* contact)
 	tempA->startContact(tempB, damage);
 	tempB->startContact(tempB, damage);
 	std::cout << "begin/n";
+	//subtract damage from both
+	//if hp < 0, add to destruction list
 }
-void EntityManager::EndContact(b2Contact* contact)
+void ContactListener::EndContact(b2Contact* contact)
 {
-	Entity* tempA = (Entity*)contact->GetFixtureA()->GetBody()->GetUserData();
-	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
-	if(tempA->getHP() < 0){
-		tempA->destructionEvent();
-		//delete tempA;
-	}
-	if(tempB->getHP() < 0){
-		tempB->destructionEvent();
-		//delete tempB;
-	}
+	//destroy Entities in destruction list
+	//make sure destructors create things if needed
 	std::cout << "end/n";
 }
-

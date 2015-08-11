@@ -60,5 +60,6 @@ void Ship::destructionEvent(){
 void Ship::startContact(Entity* other, float dmg){
 	other->applyDmg(dmg);
 	hp-=dmg;
+	m_contacting++;
 }
-void Ship::endContact(){}
+void Ship::endContact(){ m_contacting--;}

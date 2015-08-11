@@ -20,8 +20,8 @@ public:
 	static int randDebrisType();
     virtual void behavior();
 	virtual void destructionEvent();
-	void Debris::startContact(Entity* other, float dmg){}
-	void Debris::endContact(){}
+	void Debris::startContact(Entity* other, float dmg);
+	void Debris::endContact();
 };
 
 #endif
