@@ -15,7 +15,7 @@ void EntityManager::BeginContact(b2Contact* contact)
 	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
 	tempA->startContact(tempB, damage);
 	tempB->startContact(tempB, damage);
-	std::cout << type::BULLET;
+	std::cout << "begin";
 }
 void EntityManager::EndContact(b2Contact* contact)
 {
@@ -29,20 +29,17 @@ void EntityManager::EndContact(b2Contact* contact)
 		tempB->destructionEvent();
 		//delete tempB;
 	}
-	std::cout << type::DEBRIS;
+	std::cout << "end";
 }
 
-Entity *EntityManager::factory(enum type){
-
-	/*
-		switch(type){
-	case 0: return ;
+Entity *EntityManager::factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
+	switch(type){
+	case 1: return(Entity*)new Ship;
 		break;
-	case 1:
+	case 2: return(Entity*)new Debris;
 		break;
-	case 2:
+	case 3: return(Entity*)new Bullet;
 		break;
-	default:
-
-	}*/
+	default: return(Entity*)new Debris;
+	}
 }
