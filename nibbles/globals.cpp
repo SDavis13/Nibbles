@@ -89,6 +89,9 @@ int initializeOGLstuff(){
     //meshes.insert(std::pair<std::string,Mesh>("debris3", Mesh("debris3.obj")));
     meshes.insert(std::pair<std::string,Mesh>("energycanister", Mesh("energycanister.obj")));
     meshes.insert(std::pair<std::string,Mesh>("coneship", Mesh("coneship.obj")));
+    meshes.insert(std::pair<std::string,Mesh>("drone", Mesh("drone1.obj")));
+    meshes.insert(std::pair<std::string,Mesh>("bullet", Mesh("bullet.obj")));
+    meshes.insert(std::pair<std::string,Mesh>("tearshot", Mesh("tearshot.obj")));
     meshes.insert(std::pair<std::string,Mesh>("background", Mesh("background.obj")));
 
     player = new Nibbler(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
