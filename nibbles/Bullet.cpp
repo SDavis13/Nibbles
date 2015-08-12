@@ -3,20 +3,19 @@
 #include "Part.hpp"
 #include "Nibbler.hpp"
 
-void Bullet::initialize(int type){
-    std::string path = "";
+void Bullet::initialize(int type, b2Vec2 initialVelocity){
+    std::string name = "";
     switch(type){
     case 0:
-        path = "bullet.obj";
+        name = "bullet";
         break;
     case 1:
-        path = "tearshot.obj";
+        name = "tearshot";
         break;
     }
 	hp = 0.1f;
 	m_contacting = 0;
-    Mesh bulletMesh(path.c_str());
-    Part* bulletPart = new Part(*this, bulletMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    Part* bulletPart = new Part(*this, meshes[name], glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     parts.push_back(bulletPart);
 	b2FixtureDef fixDef;
     b2BodyDef bodDef;

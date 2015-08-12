@@ -48,8 +48,8 @@ int main( void )
     entities.push_back(nibbles);
     entities.push_back(&myDebris1);
 
-    nibbles->initialize(0);
-    myDebris1.initialize(4);
+    nibbles->initialize(0, b2Vec2(0,0));
+    myDebris1.initialize(4, b2Vec2(0,0));
 
 	// Load it into a VBO
 

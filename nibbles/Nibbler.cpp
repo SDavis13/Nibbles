@@ -7,7 +7,7 @@
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2Body.h>
 
-void Nibbler::initialize(int type){
+void Nibbler::initialize(int type, b2Vec2 initialVelocity){
     Part* core = new Part(*this, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
     Part* corona = new Part(*this, meshes["nibblercorona"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
     corona->opacity = 0.1;
@@ -18,6 +18,7 @@ void Nibbler::initialize(int type){
     bodDef.fixedRotation = true;
     bodDef.position = b2Vec2(position.x, position.y);
     bodDef.angle = angle*M_PI/180;
+    bodDef.linearVelocity = initialVelocity;
 	bodDef.linearDamping = 10;
     std::vector<b2Shape*> shapes = core->computeShapes(false, 0);
     core->initialize(shapes, fixDef, bodDef);

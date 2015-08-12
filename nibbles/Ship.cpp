@@ -3,7 +3,7 @@
 #include "Part.hpp"
 #include "Nibbler.hpp"
 
-void Ship::initialize(int type){
+void Ship::initialize(int type, b2Vec2 initialVelocity){
     Mesh shipMesh;
     switch(type){
     case CONESHIP:
@@ -25,6 +25,7 @@ void Ship::initialize(int type){
 	b2BodyDef bodDef;
 	bodDef.type = b2_dynamicBody;
 	bodDef.fixedRotation = true;
+    bodDef.linearVelocity = initialVelocity;
 	std::vector<b2Shape*> shapes = shipPart->computeShapes(true, 0);
 	shipPart->initialize(shapes, fixDef, bodDef);
 	primeBody = shipPart->body;

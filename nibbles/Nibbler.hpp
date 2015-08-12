@@ -15,7 +15,7 @@ public:
     Nibbler(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale) {}
     Nibbler() : Entity() {}
-    virtual void initialize(int type);
+    virtual void initialize(int type, b2Vec2 initialVelocity);
     virtual void behavior();
 	b2Vec2 getGravity(float objMass, b2Vec2 objLoc);
 	void applyThrust(b2Vec2 destination);
