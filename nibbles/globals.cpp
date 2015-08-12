@@ -98,7 +98,6 @@ int initializeOGLstuff(){
     meshes.insert(std::pair<std::string,Mesh>("background", Mesh("background.obj")));
 
     player = new Nibbler(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-	characters.assign(1,player);
     background = new Entity(glm::vec3(0,0,-10), glm::vec3(0,0,1), 0, glm::vec3(50));
     Part* backgroundPart = new Part(*background, meshes["background"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(1));
     theLight = new Entity(glm::vec3(0,0,10), glm::vec3(0,0,1), 0, glm::vec3(1));

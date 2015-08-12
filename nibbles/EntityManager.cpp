@@ -23,10 +23,12 @@ void EntityManager::EndContact(b2Contact* contact)
 	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
 	if(tempA->getHP() < 0){
 		tempA->destructionEvent();
+		//characters.remove(tempA);
 		delete tempA;
 	}
 	if(tempB->getHP() < 0){
 		tempB->destructionEvent();
+		//characters.remove(tempB);
 		delete tempB;
 	}
 	std::cout << "end";
