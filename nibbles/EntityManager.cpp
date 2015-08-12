@@ -38,7 +38,7 @@ Entity *EntityManager::factory(int type, glm::vec3 position, glm::vec3 rotationA
 		break;
 	case 2: return(Entity*)new Debris(position, rotationAxis, angle, scale);
 		break;
-	case 3: return(Entity*)new Bullet(position, rotationAxis, angle, velocity);
+	case 3: return(Entity*)new Bullet(position, rotationAxis, angle);
 		break;
 	default: return(Entity*)new Debris(position, rotationAxis, angle, scale);
 	}
