@@ -3,6 +3,7 @@
 #define SHIP_HPP
 
 #include "Entity.hpp"
+#include "EntityManager.hpp"
 
 #define CONESHIP 0
 #define DRONE 1

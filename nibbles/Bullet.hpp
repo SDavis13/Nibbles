@@ -3,6 +3,7 @@
 #define BULLET_HPP
 
 #include "Entity.hpp"
+#include "EntityManager.hpp"
 
 #define BULLET 0
 #define TEARSHOT 1

@@ -2,6 +2,8 @@
 #ifndef ENTITYMANAGER_HPP
 #define ENTITYMANAGER_HPP
 
+#include "globals.hpp"
+
 #include "Entity.hpp"
 #include "Ship.hpp"
 #include "Debris.hpp"
@@ -18,6 +20,9 @@ class EntityManager : public b2ContactListener
     // Called when two fixtures cease to touch
     virtual void EndContact(b2Contact* contact);
 
+	//request for new entities
+	void newEntity(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity);
+private:
 	//static Entity *factory(int type);
 	static Entity *factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity);
 

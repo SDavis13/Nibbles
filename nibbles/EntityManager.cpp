@@ -32,14 +32,22 @@ void EntityManager::EndContact(b2Contact* contact)
 	std::cout << "end";
 }
 
+void EntityManager::newEntity(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
+	characters.assign(1,factory(type, position, rotationAxis, angle, scale, velocity));
+}
+
+//private for now, everyone should be making requests to newEntity, not factory
 Entity *EntityManager::factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
+	Entity* temp;
 	switch(type){
-	case 1: return(Entity*)new Ship(position, rotationAxis, angle, scale);
+	case 1: temp = (Entity*)new Ship(position, rotationAxis, angle, scale);
 		break;
-	case 2: return(Entity*)new Debris(position, rotationAxis, angle, scale);
+	case 2: temp = (Entity*)new Debris(position, rotationAxis, angle, scale);
 		break;
-	case 3: return(Entity*)new Bullet(position, rotationAxis, angle);
+	case 3: temp = (Entity*)new Bullet(position, rotationAxis, angle);
 		break;
-	default: return(Entity*)new Debris(position, rotationAxis, angle, scale);
+	default: temp = (Entity*)new Debris(position, rotationAxis, angle, scale);
 	}
+	temp->initialize(0, velocity);
+	return temp;
 }

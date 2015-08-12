@@ -3,6 +3,7 @@
 #define NIBBLER_HPP
 
 #include "Entity.hpp"
+#include "EntityManager.hpp"
 
 #define NIBBLERCORE 0
 

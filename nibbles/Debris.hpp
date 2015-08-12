@@ -3,6 +3,7 @@
 #define DEBRIS_HPP
 
 #include "Entity.hpp"
+#include "EntityManager.hpp"
 
 #define RANDOM 0
 #define DEBRIS1 1
