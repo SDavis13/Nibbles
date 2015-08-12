@@ -11,8 +11,6 @@ class Nibbler : public Entity
 {	
 public:
     static const int MIN_SIZE = 1;
-	glm::vec2 previouspos;
-	glm::vec2 prepreviouspos;
     Nibbler(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale) {}
     Nibbler() : Entity() {}

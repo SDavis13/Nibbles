@@ -15,8 +15,8 @@ void Nibbler::initialize(int type, b2Vec2 initialVelocity){
     fixDef.density = 10;
     b2BodyDef bodDef;
     bodDef.type = b2_dynamicBody;
-    bodDef.fixedRotation = true;
     bodDef.position = b2Vec2(position.x, position.y);
+    bodDef.fixedRotation = true;
     bodDef.angle = angle*M_PI/180;
     bodDef.linearVelocity = initialVelocity;
 	bodDef.linearDamping = 10;
@@ -39,6 +39,18 @@ b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
     return difference;
 }
 void Nibbler::behavior(){
+    unsigned int i = 0;
+    unsigned int listSize = parts.size();
+    while(i < listSize){
+        Part* curPart = parts[i];
+        if(!(curPart->physValid)){
+            curPart->angle += 5.3;
+            if(curPart->angle > 360){
+                curPart->angle -= 360;
+            }
+        }
+        ++i;
+    }
 }
 void Nibbler::applyThrust(b2Vec2 destination){
     float scalar = primeBody->GetMass()*5;
