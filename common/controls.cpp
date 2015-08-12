@@ -102,9 +102,9 @@ void computeMatricesFromInputs(){
     float scalar = cameraDistance/rayTemp.z;
     b2Vec2 pointPosition(rayTemp.x*scalar, rayTemp.y*scalar);
 
-    theLight->position = cameraPos;
-    background->scale.x = cameraDistance;
-    background->scale.y = cameraDistance;
+    //theLight->position = cameraPos;
+    //background->scale.x = cameraDistance;
+    //background->scale.y = cameraDistance;
 
     /*
     if(myTempVar%2048 == 0){

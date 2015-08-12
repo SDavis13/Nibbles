@@ -45,4 +45,6 @@ Entity *EntityManager::factory(enum type){
 	default:
 
 	}*/
+
+    return NULL;
 }
