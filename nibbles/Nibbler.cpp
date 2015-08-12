@@ -8,20 +8,20 @@
 #include <Box2D/Dynamics/b2Body.h>
 
 void Nibbler::initialize(int type){
-    Mesh nibblerMesh("nibblercore.obj");
-    Part* nibblerPart = new Part(*this, nibblerMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(MIN_SIZE));
-    parts.push_back(nibblerPart);
+    Part* core = new Part(*this, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
+    Part* corona = new Part(*this, meshes["nibblercorona"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
+    corona->opacity = 0.1;
     b2FixtureDef fixDef;
     fixDef.density = 10;
     b2BodyDef bodDef;
     bodDef.type = b2_dynamicBody;
     bodDef.fixedRotation = true;
-    bodDef.position = b2Vec2(position.x, position.z);
+    bodDef.position = b2Vec2(position.x, position.y);
     bodDef.angle = angle*M_PI/180;
-	//add linear dampening to control max speed
-    std::vector<b2Shape*> shapes = nibblerPart->computeShapes(false, 0);
-    nibblerPart->initialize(shapes, fixDef, bodDef);
-    primeBody = nibblerPart->body;
+	bodDef.linearDamping = 10;
+    std::vector<b2Shape*> shapes = core->computeShapes(false, 0);
+    core->initialize(shapes, fixDef, bodDef);
+    primeBody = core->body;
 	primeBody->SetUserData((Entity*) this);
     mass = primeBody->GetMass();
 	hp = 10.0f;
