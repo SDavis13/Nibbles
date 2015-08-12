@@ -27,6 +27,10 @@ glm::mat4 Part::generateTransform() const{
     return returnValue;
 }
 
+Part::~Part(){
+	if(physValid) universe->DestroyBody(body); 
+}
+
 void Part::render(glm::mat4& model) const{
 	mvp = projectionMatrix * viewMatrix * model;
 
