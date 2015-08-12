@@ -41,7 +41,7 @@ void Entity::update(){
 
 void Entity::behavior(){}
 
-void Entity::initialize(int type){}
+void Entity::initialize(int type, b2Vec2 velovity){}
 
 void Entity::destructionEvent() {}
 

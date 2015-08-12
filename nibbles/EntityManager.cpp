@@ -23,23 +23,23 @@ void EntityManager::EndContact(b2Contact* contact)
 	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
 	if(tempA->getHP() < 0){
 		tempA->destructionEvent();
-		//delete tempA;
+		delete tempA;
 	}
 	if(tempB->getHP() < 0){
 		tempB->destructionEvent();
-		//delete tempB;
+		delete tempB;
 	}
 	std::cout << "end";
 }
 
 Entity *EntityManager::factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
 	switch(type){
-	case 1: return(Entity*)new Ship;
+	case 1: return(Entity*)new Ship(position, rotationAxis, angle, scale);
 		break;
-	case 2: return(Entity*)new Debris;
+	case 2: return(Entity*)new Debris(position, rotationAxis, angle, scale);
 		break;
-	case 3: return(Entity*)new Bullet;
+	case 3: return(Entity*)new Bullet(position, rotationAxis, angle, velocity);
 		break;
-	default: return(Entity*)new Debris;
+	default: return(Entity*)new Debris(position, rotationAxis, angle, scale);
 	}
 }

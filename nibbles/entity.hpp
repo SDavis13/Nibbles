@@ -34,7 +34,7 @@ public:
     void render(glm::mat4 transform);
     void render();
     void update();
-    virtual void initialize(int type);
+    virtual void initialize(int type, b2Vec2 velocity);
     virtual void behavior();
 	virtual void destructionEvent();
 	b2Vec2 getWorldCenter();
