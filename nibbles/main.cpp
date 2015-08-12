@@ -45,8 +45,8 @@ int main( void )
     Debris myDebris1(glm::vec3(-2,-2,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
     entities.push_back(background);
-    entities.push_back(nibbles);
     entities.push_back(&myDebris1);
+    entities.push_back(nibbles);
 
     nibbles->initialize(0, b2Vec2(0,0));
     myDebris1.initialize(4, b2Vec2(0,0));
@@ -166,7 +166,7 @@ int main( void )
         while(bodies != NULL){
 			//Entity* temp = (Entity*)bodies->GetUserData();
             if(bodies != player->primeBody){
-                bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetWorldCenter()) ), true);
+                bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetPosition()) ), true);
             }
             bodies = bodies->GetNext();
 			//if(temp->getHP() < 0){

@@ -10,7 +10,7 @@
 void Nibbler::initialize(int type, b2Vec2 initialVelocity){
     Part* core = new Part(*this, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
     Part* corona = new Part(*this, meshes["nibblercorona"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
-    corona->opacity = 0.1;
+    corona->opacity = 0.4;
     b2FixtureDef fixDef;
     fixDef.density = 10;
     b2BodyDef bodDef;
@@ -31,7 +31,7 @@ void Nibbler::initialize(int type, b2Vec2 initialVelocity){
 	m_contacting = 0;
 }
 b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
-    b2Vec2 difference = primeBody->GetWorldCenter() - objLoc;
+    b2Vec2 difference = primeBody->GetPosition() - objLoc;
     float distanceSqr = difference.LengthSquared();
     float force = mass*objMass/distanceSqr * 100000;
     difference.Normalize();
@@ -43,11 +43,16 @@ void Nibbler::behavior(){
     unsigned int listSize = parts.size();
     while(i < listSize){
         Part* curPart = parts[i];
+        glm::vec3& partPos = (curPart->position);
+        b2Body* curBody = curPart->body;
         if(!(curPart->physValid)){
             curPart->angle += 5.3;
             if(curPart->angle > 360){
                 curPart->angle -= 360;
             }
+        }
+        if(i > 1){
+            b2Vec2 bodPos = curBody->GetPosition();
         }
         ++i;
     }
@@ -55,7 +60,7 @@ void Nibbler::behavior(){
 void Nibbler::applyThrust(b2Vec2 destination){
     float scalar = primeBody->GetMass()*5;
     float maxThrust = (scalar*15);
-    b2Vec2 difference = destination - primeBody->GetWorldCenter();
+    b2Vec2 difference = destination - primeBody->GetPosition();
     difference *= scalar;
     if(difference.Length() > maxThrust){
         difference.Normalize();

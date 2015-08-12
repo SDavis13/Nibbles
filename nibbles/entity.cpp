@@ -46,7 +46,7 @@ void Entity::initialize(int type, b2Vec2 velovity){}
 void Entity::destructionEvent() {}
 
 b2Vec2 Entity::getWorldCenter(){
-	return primeBody->GetWorldCenter();
+	return primeBody->GetPosition();
 }
 
 glm::vec3 Entity::getGLCenter(){
