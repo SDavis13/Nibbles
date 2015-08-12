@@ -1,7 +1,10 @@
 #define GLOBALS_CPP
 
+#include <utility>
+
 #include "globals.hpp"
 #include "Nibbler.hpp"
+#include "LightSource.hpp"
 #include "EntityManager.hpp"
 
 int initializeOGLstuff(){
@@ -76,10 +79,24 @@ int initializeOGLstuff(){
     
     b2Vec2 uniGravity(0,0);
     universe = new b2World(uniGravity);
-	ContactListenerInstance = new EntityManager;
-	universe->SetContactListener(ContactListenerInstance);
+	//ContactListenerInstance = new EntityManager;
+	//universe->SetContactListener(ContactListenerInstance);
+
+    meshes.insert(std::pair<std::string,Mesh>("nibblercore", Mesh("nibblercore.obj")));
+    meshes.insert(std::pair<std::string,Mesh>("nibblercorona", Mesh("nibblercorona.obj")));
+    //meshes.insert(std::pair<std::string,Mesh>("debris1", Mesh("debris1.obj")));
+    //meshes.insert(std::pair<std::string,Mesh>("debris2", Mesh("debris2.obj")));
+    //meshes.insert(std::pair<std::string,Mesh>("debris3", Mesh("debris3.obj")));
+    meshes.insert(std::pair<std::string,Mesh>("energycanister", Mesh("energycanister.obj")));
+    //meshes.insert(std::pair<std::string,Mesh>("coneship", Mesh("coneship.obj")));
+    meshes.insert(std::pair<std::string,Mesh>("background", Mesh("background.obj")));
 
     player = new Nibbler(glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
+    background = new Entity(glm::vec3(0,0,-10), glm::vec3(0,0,1), 0, glm::vec3(50));
+    Part* backgroundPart = new Part(*background, meshes["background"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(1));
+    theLight = new Entity(glm::vec3(0,0,10), glm::vec3(0,0,1), 0, glm::vec3(1));
+    light = new LightSource(*theLight, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(1), glm::vec3(0));
+    light->lightColor = glm::vec3(0.75f, 0.1f, 1.0f);
 
     return 0;
 }

@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <map>
+#include <string>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -24,14 +26,18 @@ using namespace glm;
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Common/b2Math.h>
 
+#include "Mesh.hpp"
+
 #ifdef GLOBALS_CPP
 #define COMPILE_HERE
 #else
 #define COMPILE_HERE extern
 #endif
 
+class Entity;
 class Nibbler;
 class EntityManager;
+class LightSource;
 
 #define COUNTERCLOCKWISE 1
 #define COLINEAR 0
@@ -42,6 +48,9 @@ COMPILE_HERE GLFWwindow* window;
 
 COMPILE_HERE b2World* universe;
 COMPILE_HERE Nibbler* player;
+COMPILE_HERE Entity* background;
+COMPILE_HERE Entity* theLight;
+COMPILE_HERE LightSource* light;
 
 COMPILE_HERE std::vector<unsigned short> indices;
 COMPILE_HERE std::vector<glm::vec3> indexed_vertices;
@@ -77,6 +86,8 @@ COMPILE_HERE GLuint Texture;
 COMPILE_HERE GLuint TextureID;
 
 COMPILE_HERE EntityManager* ContactListenerInstance;
+
+COMPILE_HERE std::map<std::string, Mesh> meshes;
 
 int initializeOGLstuff();
 
