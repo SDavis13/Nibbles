@@ -31,7 +31,7 @@ glm::mat4 getProjectionMatrix(){
 // Initial Field of View
 static float myinitialFoV = 45.0f;
 
-static float zoom = 4;
+static float zoom = 20;
 
 static float myspeed = 10.0f;
 static double mylasttime = 0;
@@ -71,7 +71,7 @@ void computeMatricesFromInputs(){
     if(size != player->energy){
         size = player->energy;
         float temp = period*int(size/period);
-        viewDist = ( temp + (pow((size-temp),curve))/(pow(period,(curve-1))) ) + player->MIN_SIZE*3;
+        viewDist = ( temp + (pow((size-temp),curve))/(pow(period,(curve-1))) ) + player->MIN_SIZE;
     }
     float cameraDistance = viewDist + zoom;
 
@@ -102,9 +102,8 @@ void computeMatricesFromInputs(){
     float scalar = cameraDistance/rayTemp.z;
     b2Vec2 pointPosition(rayTemp.x*scalar, rayTemp.y*scalar);
 
-    //theLight->position = cameraPos;
-    //background->scale.x = cameraDistance;
-    //background->scale.y = cameraDistance;
+    theLight->position = player->position;
+    background->position.z = cameraDistance-90;
 
     /*
     if(myTempVar%2048 == 0){
