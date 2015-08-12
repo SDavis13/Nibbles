@@ -31,14 +31,10 @@ void Entity::render(glm::mat4 transform){
 
 void Entity::update(){
     if(physValid){
-        for(unsigned int i = 0; i < parts.size(); ++i){
-            Part* curPart = parts[i];
-            b2Body* curBody = curPart->body;
-            curPart->angle = (curBody->GetAngle())*180/M_PI;
-            b2Vec2 pos2d = curBody->GetPosition();
-            curPart->position.x = pos2d.x;
-            curPart->position.y = pos2d.y;
-        }
+        angle = (primeBody->GetAngle())*180/M_PI;
+        b2Vec2 pos2d = primeBody->GetPosition();
+        position.x = pos2d.x;
+        position.y = pos2d.y;
         behavior();
     }
 }
@@ -54,8 +50,7 @@ b2Vec2 Entity::getWorldCenter(){
 }
 
 glm::vec3 Entity::getGLCenter(){
-    b2Vec2 location = primeBody->GetWorldCenter();
-	return glm::vec3(location.x, location.y, 0);
+	return position;
 }
 
 float Entity::getHP(){

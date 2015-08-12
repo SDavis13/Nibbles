@@ -22,7 +22,7 @@ void Bullet::initialize(int type, b2Vec2 initialVelocity){
     bodDef.type = b2_dynamicBody;
     bodDef.fixedRotation = true;
 	bodDef.linearVelocity = initialVelocity;
-	bodDef.position = b2Vec2(position.x, position.z);
+	bodDef.position = b2Vec2(position.x, position.y);
     std::vector<b2Shape*> shapes = bulletPart->computeShapes(true, 0);
     bulletPart->initialize(shapes, fixDef, bodDef);
     primeBody = bulletPart->body;

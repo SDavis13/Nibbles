@@ -52,7 +52,7 @@ void Debris::initialize(int type, b2Vec2 initialVelocity){
     fixDef.restitution = 0.7;
     Part* debrisPart = new Part(*this, meshes[name], glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     bodDef.type = b2_dynamicBody;
-    bodDef.position = b2Vec2(position.x, position.z);
+    bodDef.position = b2Vec2(position.x, position.y);
     bodDef.angle = angle*M_PI/180;
     bodDef.linearVelocity = initialVelocity;
     std::vector<b2Shape*> shapes = debrisPart->computeShapes(false, 0);
