@@ -44,6 +44,7 @@ void Nibbler::refresh(){
     for(unsigned int i = 0; i < parts.size(); ++i){
         parts[i]->scale = glm::vec3(energy/128);
     }
+    bodDef.position = primeBody->GetPosition();
     bodDef.linearVelocity = primeBody->GetLinearVelocity();
     Part* core = parts[0];
     universe->DestroyBody(primeBody);
