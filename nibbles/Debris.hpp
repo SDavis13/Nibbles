@@ -14,8 +14,9 @@
 class Debris : public Entity
 {
 public:
+    int life;
     Debris(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
-            : Entity(position, rotationAxis, angle, scale) {}
+            : Entity(position, rotationAxis, angle, scale), life(0) {}
     Debris() : Entity() {}
     virtual void initialize(int type, b2Vec2 initialVelocity);
 	static int randDebrisType();

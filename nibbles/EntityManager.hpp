@@ -24,7 +24,8 @@ public:
     // Called when two fixtures cease to touch
     virtual void EndContact(b2Contact* contact);
 
-    void addEntity(Entity* newEntity);//make sure entity added with this is initialized!
+    void addEntity(Entity* entity);//make sure entity added with this is initialized!
+    void destroyEntity(Entity* entity);
     void update();
     void render();
 

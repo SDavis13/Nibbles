@@ -15,8 +15,10 @@ void EntityManager::BeginContact(b2Contact* contact)
 	float damage = temp.Length();
 	Entity* tempA = (Entity*)(bodyA->GetUserData());
 	Entity* tempB = (Entity*)(bodyB->GetUserData());
-	tempA->startContact(tempB, damage);
-	tempB->startContact(tempA, damage);
+    if(tempA->damage && tempB->damage){
+	    tempA->startContact(tempB, damage);
+	    tempB->startContact(tempA, damage);
+    }
 	std::cout << "begin";
 }
 void EntityManager::EndContact(b2Contact* contact)
@@ -107,6 +109,11 @@ void EntityManager::createAsteroids(int number){
 
 void EntityManager::addEntity(Entity* entity){
     entityList.insert(entity);
+}
+
+void EntityManager::destroyEntity(Entity* entity){
+    deletionList.insert(entity);
+    entityList.erase(entity);
 }
 
 //not used for now

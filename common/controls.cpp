@@ -68,12 +68,12 @@ void computeMatricesFromInputs(){
 		zoom += deltaTime * myspeed;
 	}
 
-    if(size != player->energy){
-        size = player->energy;
+    /*if(size != player->energy/128){
+        size = player->energy/128;
         float temp = period*int(size/period);
         viewDist = ( temp + (pow((size-temp),curve))/(pow(period,(curve-1))) ) + player->MIN_SIZE;
-    }
-    float cameraDistance = viewDist + zoom;
+    }*/
+    float cameraDistance = /*viewDist*/ + zoom;
 
 	float FoV = myinitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 

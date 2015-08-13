@@ -20,6 +20,7 @@ void Nibbler::initialize(int type, b2Vec2 initialVelocity){
     //corona3->opacity = 0.4;
     b2FixtureDef fixDef;
     fixDef.density = 10;
+    fixDef.isSensor = true;
     b2BodyDef bodDef;
     bodDef.type = b2_dynamicBody;
     bodDef.position = b2Vec2(position.x, position.y);
@@ -33,7 +34,7 @@ void Nibbler::initialize(int type, b2Vec2 initialVelocity){
 	primeBody->SetUserData((Entity*) this);
     mass = primeBody->GetMass();
 	hp = 5000.0f;
-    energy = MIN_SIZE;
+    energy = MIN_SIZE*128;
     physValid = true;
 	m_contacting = 0;
 }
@@ -46,6 +47,7 @@ b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
     return difference;
 }
 void Nibbler::behavior(){
+    hp = energy;
     /*unsigned int i = 0;
     unsigned int listSize = parts.size();
     while(i < listSize){
@@ -82,12 +84,11 @@ void Nibbler::destructionEvent(){
 	//end game some how
 }
 void Nibbler::startContact(Entity* other, float dmg){
-	if(other->getHP() > hp){
-	other->applyDmg(dmg);
-	hp-=dmg;
-	}else{
+	if(other->primeBody->GetFixtureList()->GetShape()->m_radius < primeBody->GetFixtureList()->GetShape()->m_radius){
 		energy += other->getEnergy();
+        mass += other->mass;
+        gameMaster->destroyEntity(other);
 	}
-	 m_contacting++; 
+    m_contacting++;
 }
 void Nibbler::endContact(){ m_contacting--; }

@@ -27,6 +27,7 @@ void Bullet::initialize(int type, b2Vec2 initialVelocity){
         energy = -2;
         break;
     }
+    fixDef.filter.maskBits = 0x0000;
 	m_contacting = 0;
     Part* bulletPart = new Part(*this, meshes[name], glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
     bodDef.type = b2_dynamicBody;
@@ -41,7 +42,14 @@ void Bullet::initialize(int type, b2Vec2 initialVelocity){
     mass = primeBody->GetMass();
     physValid = true;
 }
-void Bullet::behavior(){}
+void Bullet::behavior(){
+    ++life;
+    if(life > 50){
+        for(b2Fixture* fixtures = primeBody->GetFixtureList(); fixtures; fixtures=fixtures->GetNext()){
+            fixtures->Refilter();
+        }
+    }
+}
 void Bullet::destructionEvent(){
 	//pretty much nothing, shower of sparks?
 }

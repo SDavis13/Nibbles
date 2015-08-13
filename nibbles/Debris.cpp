@@ -61,12 +61,18 @@ void Debris::initialize(int type, b2Vec2 initialVelocity){
 	primeBody->SetUserData((Entity*) this);
     mass = primeBody->GetMass();
     physValid = true;
+    damage = false;
 }
 int Debris::randDebrisType(){
 	srand(time(NULL));
 	return (rand() % 3 + 1);
 }
-void Debris::behavior(){}
+void Debris::behavior(){
+    ++life;
+    if(life > 50){
+        damage = true;
+    }
+}
 void Debris::destructionEvent(){
 	//create smaller debris or destroy altogeher
 }
