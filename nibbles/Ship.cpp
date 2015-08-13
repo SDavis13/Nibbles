@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 void Ship::initialize(int type, b2Vec2 initialVelocity){
+	tick = 0;
     Mesh* shipMesh;
     b2FixtureDef fixDef;
     switch(type){
@@ -17,7 +18,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
         fixDef.density = 5;
         fixDef.friction = 0.3;
         energy = 5;
-        maxThrust = 200*scale.x*scale.y;
+        maxThrust = 50*scale.x*scale.y;
         bulletType = BULLET;
         break;
     case DRONE:
@@ -59,10 +60,21 @@ void Ship::behavior(){
 		temp.x*=maxThrust;
 		temp.y*=maxThrust;
 	}else{
+		if(distance < field +5){
 			float desiredAngle = (float)std::atan2(temp.y, temp.x);
+			if(tick = 5){
+				tick = 0;
 			float holder = temp.x;
 			temp.x = temp.y*maxThrust;
-			temp.y = holder*maxThrust;		
+			temp.y = holder*maxThrust;	
+			}
+			tick++;
+		}else{
+			//pick direction and apply force
+			temp.x*=-maxThrust;
+			temp.y*=-maxThrust;
+		}
+
 	}
 	primeBody->SetTransform( primeBody->GetPosition(), desiredAngle );
 	primeBody->ApplyLinearImpulse(temp, primeBody->GetLocalCenter(), true);
