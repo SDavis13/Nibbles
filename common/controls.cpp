@@ -39,7 +39,7 @@ static double mylasttime = 0;
 static float period = 12; // can change this to whatever you want
 static float curve = 4; //curve intensity; this can also be changed, but 4 seems good to me
 static float size = -5;
-static float viewDist = 0;
+static float viewDist = 20;
 
 static unsigned int myTempVar = 0;
 

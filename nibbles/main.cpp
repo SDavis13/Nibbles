@@ -40,27 +40,46 @@ int main( void )
     }
 
     Nibbler* nibbles = player;
-    Bullet* bullet = new Bullet(glm::vec3(3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.125));
-    Bullet* tearshot = new Bullet(glm::vec3(-3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
-    Ship* fighter = new Ship(glm::vec3(-5,-5,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
-    Ship* drone = new Ship(glm::vec3(5,-5,0), glm::vec3(0,0,1), 0, glm::vec3(0.2));
-    Debris* debris = new Debris(glm::vec3(0,-4,0), glm::vec3(0,0,1), 0, glm::vec3(0.4));
-    Debris* canister = new Debris(glm::vec3(4,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+    Ship* another = new Ship(glm::vec3(10,10,0), glm::vec3(0,0,1), 0, glm::vec3(1));
+    Ship* another2 = new Ship(glm::vec3(-10,10,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
+    Ship* fighter = new Ship(glm::vec3(-10,-10,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
+    Ship* drone = new Ship(glm::vec3(10,-10,0), glm::vec3(0,0,1), 0, glm::vec3(0.2));
+    Debris* debris = new Debris(glm::vec3(0,-15,0), glm::vec3(0,0,1), 0, glm::vec3(0.4));
+    Debris* canister = new Debris(glm::vec3(-15,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+
+    Ship* onemore1 = new Ship(glm::vec3(15,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.3));
+    Ship* onemore2 = new Ship(glm::vec3(0,15,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+    Debris* onemore3 = new Debris(glm::vec3(-17,-17,0), glm::vec3(0,0,1), 0, glm::vec3(1));
+    Debris* onemore4 = new Debris(glm::vec3(17,-17,0), glm::vec3(0,0,1), 0, glm::vec3(2));
+    Debris* onemore5 = new Debris(glm::vec3(-17,17,0), glm::vec3(0,0,1), 0, glm::vec3(3));
+    Debris* onemore6 = new Debris(glm::vec3(17,17,0), glm::vec3(0,0,1), 0, glm::vec3(0.7));
 
     nibbles->initialize(0, b2Vec2(0,0));
-    bullet->initialize(0, b2Vec2(0,0));
-    tearshot->initialize(1, b2Vec2(0,0));
+    another->initialize(0, b2Vec2(0,0));
+    another2->initialize(1, b2Vec2(0,0));
     fighter->initialize(0, b2Vec2(0,0));
     drone->initialize(1, b2Vec2(0,0));
     debris->initialize(2, b2Vec2(0,0));
     canister->initialize(4, b2Vec2(0,0));
+    onemore1->initialize(0, b2Vec2(0,0));
+    onemore2->initialize(1, b2Vec2(0,0));
+    onemore3->initialize(0, b2Vec2(0,0));
+    onemore4->initialize(0, b2Vec2(0,0));
+    onemore5->initialize(0, b2Vec2(0,0));
+    onemore6->initialize(0, b2Vec2(0,0));
 
-    gameMaster->addEntity(bullet);
-    gameMaster->addEntity(tearshot);
+    gameMaster->addEntity(another);
+    gameMaster->addEntity(another2);
     gameMaster->addEntity(fighter);
     gameMaster->addEntity(drone);
     gameMaster->addEntity(debris);
     gameMaster->addEntity(canister);
+    gameMaster->addEntity(onemore1);
+    gameMaster->addEntity(onemore2);
+    gameMaster->addEntity(onemore3);
+    gameMaster->addEntity(onemore4);
+    gameMaster->addEntity(onemore5);
+    gameMaster->addEntity(onemore6);
 
 	// Load it into a VBO
 

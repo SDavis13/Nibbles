@@ -49,7 +49,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
     physValid = true;
 }
 void Ship::behavior(){
-	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();
+	/*b2Vec2 temp = getWorldCenter()-player->getWorldCenter();
 	float distance = temp.Length();
 	float desiredAngle = (float)std::atan2(temp.x, temp.y);
 	temp.Normalize();
@@ -77,7 +77,7 @@ void Ship::behavior(){
 
 	}
 	primeBody->SetTransform( primeBody->GetPosition(), desiredAngle );
-	primeBody->ApplyLinearImpulse(temp, primeBody->GetLocalCenter(), true);
+	primeBody->ApplyLinearImpulse(temp, primeBody->GetLocalCenter(), true);*/
 }
 static glm::vec3 randomDebrisPos(Ship& ship){
     glm::vec3 debrisPos(ship.primeBody->GetWorldCenter().x, ship.primeBody->GetWorldCenter().y, 0);

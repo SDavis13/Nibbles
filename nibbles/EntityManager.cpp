@@ -97,8 +97,7 @@ void EntityManager::createShipSquad(int number){
 }
 
 void EntityManager::createAsteroids(int number){
-	int arena = (int)meshes["background"].getRadius()/2;
-	arena *= background->scale.x;
+	int arena = (int)(meshes["background"].getRadius()*background->scale.x/2);
 	for(int i = 0; i < number; i++){
 		int size = 1+rand()%(int)(player->energy+3);
 		Entity* temp;
