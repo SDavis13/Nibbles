@@ -31,10 +31,7 @@ class EntityManager : public b2ContactListener
     void createShipSquad(int number);//creates ships in random locations
     void createAsteroids(int number);//creates asteroids in random locations
 
-	//request for new entities
-	void newEntity(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity);
 private:
-	//static Entity *factory(int type);
 	static Entity *factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity);
 
 };

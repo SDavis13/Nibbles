@@ -4,6 +4,8 @@
 #include "Box2D\Dynamics\Contacts\b2Contact.h"
 #include <iostream>
 #include <cmath>
+#include <stdlib.h>
+#include <time.h>
 
 void EntityManager::BeginContact(b2Contact* contact)
 {
@@ -69,11 +71,40 @@ void EntityManager::render(){
     player->render();
 }
 
-void EntityManager::newEntity(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
-	//characters.assign(1,factory(type, position, rotationAxis, angle, scale, velocity));
+void EntityManager::createDroneSquad(int number){
+	int areana = (int)meshes["background"].getRadius()/2;
+	for(int i = 0; i < number; i++){
+		int size = 1+rand()%(int)(player->energy+3);
+		Entity* temp;
+		temp = (Entity*)new Ship(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
+		temp->initialize(1, b2Vec2(0,0));
+		entityList.insert(temp);
+	}
 }
 
-//private for now, everyone should be making requests to newEntity, not factory
+void EntityManager::createShipSquad(int number){
+	int areana = (int)meshes["background"].getRadius()/2;
+	for(int i = 0; i < number; i++){
+		int size = 1+rand()%(int)(player->energy+3);
+		Entity* temp;
+		temp = (Entity*)new Ship(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
+		temp->initialize(0, b2Vec2(0,0));
+		entityList.insert(temp);
+	}
+}
+
+void EntityManager::createAsteroids(int number){
+	int areana = (int)meshes["background"].getRadius()/2;
+	for(int i = 0; i < number; i++){
+		int size = 1+rand()%(int)(player->energy+3);
+		Entity* temp;
+		temp = (Entity*)new Debris(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
+		temp->initialize((1+rand()%4), b2Vec2(0,0));
+		entityList.insert(temp);
+	}
+}
+
+//not used for now
 Entity *EntityManager::factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
 	Entity* temp;
 	switch(type){
