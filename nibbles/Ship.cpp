@@ -14,7 +14,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
         fixDef.density = 5;
         fixDef.friction = 0.3;
         energy = 5;
-        maxThrust = 500*scale.x;
+        maxThrust = 500*scale.x*scale.y;
         bulletType = BULLET;
         break;
     case DRONE:
@@ -24,7 +24,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
         fixDef.density = 7;
         fixDef.friction = 0.2;
         energy = 7;
-        maxThrust = 400*scale.x;
+        maxThrust = 400*scale.x*scale.y;
         bulletType = TEARSHOT;
         break;
 	}
@@ -64,7 +64,7 @@ void Ship::behavior(){
 			temp.y = holder*maxThrust;
 		}
 	}
-	primeBody->ApplyForceToCenter(temp, true);
+	primeBody->ApplyLinearImpulse(temp, b2Vec2(0,0), true);
 }
 void Ship::destructionEvent(){
 	
