@@ -6,10 +6,12 @@
 
 Entity::~Entity(){
     for(int i = 0; i < parts.size(); ++i){
-        delete parts[i];
-        parts[i] = NULL;
+		Part* temp = parts[i]
+        delete temp;
+		//parts.erase(std::remove(parts.begin(), parts.end(), parts[i]), parts.end());
+		parts[i] = NULL;
     }
-    parts.clear();
+    
     primeBody = NULL;
 }
 

@@ -37,7 +37,7 @@ public:
                 whole(source), position(relPosition), rotationAxis(relRotAxis), angle(relAngle), 
                     scale(relScale), mesh(mesh), valid(true), physValid(false), opacity(1.0f) {source.addPart(this); }
     Part() : whole(defaultEntity), mesh(defaultMesh), valid(false), physValid(false) { printf("stuff"); }
-    ~Part() { if(physValid) universe->DestroyBody(body); }
+    ~Part();
     //Part(const Part& other) { printf("Copying Part"); }
     void render(glm::mat4& model) const;
     void render() const;
