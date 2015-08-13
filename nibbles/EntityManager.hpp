@@ -13,6 +13,7 @@
 
 class EntityManager : public b2ContactListener
 {
+public:
     std::set<Entity*> entityList;
     std::set<Entity*> deletionList;
 
