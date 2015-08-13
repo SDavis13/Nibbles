@@ -40,7 +40,7 @@ void Nibbler::initialize(int type, b2Vec2 initialVelocity){
 b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
     b2Vec2 difference = primeBody->GetPosition() - objLoc;
     float distanceSqr = difference.LengthSquared();
-    float force = mass*objMass/distanceSqr * 100000;
+    float force = (10*mass) * (objMass/distanceSqr * 100000);
     difference.Normalize();
     difference *= force;
     return difference;

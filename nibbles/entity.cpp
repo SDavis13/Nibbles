@@ -7,9 +7,9 @@
 Entity::~Entity(){
     for(int i = 0; i < parts.size(); ++i){
 		Part* temp = parts[i];
+        parts[i] = NULL;
         delete temp;
 		//parts.erase(std::remove(parts.begin(), parts.end(), parts[i]), parts.end());
-		parts[i] = NULL;
     }
     
     primeBody = NULL;

@@ -5,28 +5,38 @@
 
 void Bullet::initialize(int type, b2Vec2 initialVelocity){
     std::string name = "";
+    b2FixtureDef fixDef;
+    b2BodyDef bodDef;
     switch(type){
     case 0:
         name = "bullet";
+        hp = 5.0f;
+        fixDef.density = 20;
+        fixDef.friction = 0.3;
+        fixDef.restitution = 1;
+        energy = -0.4;
         break;
     case 1:
         name = "tearshot";
+        hp = 0.5f;
+        fixDef.density = 0.5;
+        fixDef.friction = 0.3;
+        fixDef.restitution = 0;
+        energy = -2;
         break;
     }
-	hp = 0.1f;
 	m_contacting = 0;
     Part* bulletPart = new Part(*this, meshes[name], glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-    parts.push_back(bulletPart);
-	b2FixtureDef fixDef;
-    b2BodyDef bodDef;
     bodDef.type = b2_dynamicBody;
-    bodDef.fixedRotation = true;
+    bodDef.fixedRotation = false;
 	bodDef.linearVelocity = initialVelocity;
 	bodDef.position = b2Vec2(position.x, position.y);
-    std::vector<b2Shape*> shapes = bulletPart->computeShapes(true, 0);
+    std::vector<b2Shape*> shapes = bulletPart->computeShapes(false, 0);
     bulletPart->initialize(shapes, fixDef, bodDef);
     primeBody = bulletPart->body;
 	primeBody->SetUserData((Entity*) this);
+    mass = primeBody->GetMass();
+    physValid = true;
 }
 void Bullet::behavior(){}
 void Bullet::destructionEvent(){

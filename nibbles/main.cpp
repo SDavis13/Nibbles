@@ -42,14 +42,29 @@ int main( void )
     std::vector<Entity*> entities;
 
     Nibbler* nibbles = player;
-    Debris myDebris1(glm::vec3(-2,-2,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+    Bullet* bullet = new Bullet(glm::vec3(3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+    Bullet* tearshot = new Bullet(glm::vec3(-3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+    Ship* fighter = new Ship(glm::vec3(-3,-3,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
+    Ship* drone = new Ship(glm::vec3(3,-3,0), glm::vec3(0,0,1), 0, glm::vec3(0.3));
+    Debris* debris = new Debris(glm::vec3(0,-4,0), glm::vec3(0,0,1), 0, glm::vec3(0.4));
+    Debris* canister = new Debris(glm::vec3(4,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
     entities.push_back(background);
-    entities.push_back(&myDebris1);
+    entities.push_back(bullet);
+    entities.push_back(tearshot);
+    entities.push_back(fighter);
+    entities.push_back(drone);
+    entities.push_back(debris);
+    entities.push_back(canister);
     entities.push_back(nibbles);
 
     nibbles->initialize(0, b2Vec2(0,0));
-    myDebris1.initialize(4, b2Vec2(0,0));
+    bullet->initialize(0, b2Vec2(0,0));
+    tearshot->initialize(1, b2Vec2(0,0));
+    fighter->initialize(0, b2Vec2(0,0));
+    drone->initialize(1, b2Vec2(0,0));
+    debris->initialize(2, b2Vec2(0,0));
+    canister->initialize(4, b2Vec2(0,0));
 
 	// Load it into a VBO
 

@@ -2,34 +2,46 @@
 #include "Mesh.hpp"
 #include "Part.hpp"
 #include "Nibbler.hpp"
+#include "Debris.hpp"
 
 void Ship::initialize(int type, b2Vec2 initialVelocity){
-    Mesh shipMesh;
+    Mesh* shipMesh;
+    b2FixtureDef fixDef;
     switch(type){
     case CONESHIP:
-        shipMesh = Mesh("coneship.obj");
-		hp = 5.0f;
+        shipMesh = &meshes["coneship"];
+		hp = 50.0f;
+        fixDef.density = 5;
+        fixDef.friction = 0.3;
+        energy = 5;
+        maxThrust = 500*scale.x;
+        bulletType = BULLET;
         break;
     case DRONE:
-        shipMesh = Mesh("drone1.obj");
-		hp = 2.0f;
-        break;
     default: //DRONE
-        shipMesh = Mesh("drone1.obj");
+        shipMesh = &meshes["drone"];
+        hp = 20.0f;
+        fixDef.density = 7;
+        fixDef.friction = 0.2;
+        energy = 7;
+        maxThrust = 400*scale.x;
+        bulletType = TEARSHOT;
         break;
 	}
 	m_contacting = 0;
-	Part* shipPart = new Part(*this, shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
-	parts.push_back(shipPart);
-	b2FixtureDef fixDef;
+    fixDef.restitution = 0.55;
+	Part* shipPart = new Part(*this, *shipMesh, glm::vec3(0), glm::vec3(0,1,0), 0, glm::vec3(1));
 	b2BodyDef bodDef;
 	bodDef.type = b2_dynamicBody;
-	bodDef.fixedRotation = true;
+    bodDef.position = b2Vec2(position.x, position.y);
+	bodDef.fixedRotation = false;
     bodDef.linearVelocity = initialVelocity;
-	std::vector<b2Shape*> shapes = shipPart->computeShapes(true, 0);
+	std::vector<b2Shape*> shapes = shipPart->computeShapes(false, 0);
 	shipPart->initialize(shapes, fixDef, bodDef);
 	primeBody = shipPart->body;
 	primeBody->SetUserData((Entity*) this);
+    mass = primeBody->GetMass();
+    physValid = true;
 }
 void Ship::behavior(){
 	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();
@@ -52,11 +64,13 @@ void Ship::behavior(){
 			temp.y = holder*maxThrust;
 		}
 	}
-	//
 	primeBody->ApplyForceToCenter(temp, true);
 }
 void Ship::destructionEvent(){
-	//request debris from factory?
+	
+}
+void Ship::fire(){
+
 }
 void Ship::startContact(Entity* other, float dmg){
 	other->applyDmg(dmg);
