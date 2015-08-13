@@ -39,8 +39,6 @@ int main( void )
         return temp;
     }
 
-    std::vector<Entity*> entities;
-
     Nibbler* nibbles = player;
     Bullet* bullet = new Bullet(glm::vec3(3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.125));
     Bullet* tearshot = new Bullet(glm::vec3(-3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
@@ -49,14 +47,12 @@ int main( void )
     Debris* debris = new Debris(glm::vec3(0,-4,0), glm::vec3(0,0,1), 0, glm::vec3(0.4));
     Debris* canister = new Debris(glm::vec3(4,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
-    entities.push_back(background);
-    entities.push_back(bullet);
-    entities.push_back(tearshot);
-    entities.push_back(fighter);
-    entities.push_back(drone);
-    entities.push_back(debris);
-    entities.push_back(canister);
-    entities.push_back(nibbles);
+    gameMaster->addEntity(bullet);
+    gameMaster->addEntity(tearshot);
+    gameMaster->addEntity(fighter);
+    gameMaster->addEntity(drone);
+    gameMaster->addEntity(debris);
+    gameMaster->addEntity(canister);
 
     nibbles->initialize(0, b2Vec2(0,0));
     bullet->initialize(0, b2Vec2(0,0));
@@ -172,7 +168,10 @@ int main( void )
 
         light->setUpLight();
 
-        for(unsigned int i = 0; i < entities.size(); ++i){
+        gameMaster->update();
+        gameMaster->render();
+
+        /*for(unsigned int i = 0; i < entities.size(); ++i){
             entities[i]->update();
             entities[i]->render();
         }
@@ -183,7 +182,7 @@ int main( void )
                 bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetPosition()) ), true);
             }
             bodies = bodies->GetNext();
-        }
+        }*/
 
         if(framenumber%1024 == 0){
             framenumber--;
