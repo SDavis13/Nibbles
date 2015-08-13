@@ -104,6 +104,10 @@ void EntityManager::createAsteroids(int number){
 	}
 }
 
+void EntityManager::addEntity(Entity* entity){
+    entityList.insert(entity);
+}
+
 //not used for now
 Entity *EntityManager::factory(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity){
 	Entity* temp;
