@@ -3,6 +3,9 @@
 #include "Part.hpp"
 #include "Nibbler.hpp"
 #include "Debris.hpp"
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <stdlib.h>
 
 void Ship::initialize(int type, b2Vec2 initialVelocity){
     Mesh* shipMesh;
@@ -36,6 +39,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
     bodDef.position = b2Vec2(position.x, position.y);
 	bodDef.fixedRotation = false;
     bodDef.linearVelocity = initialVelocity;
+    bodDef.angle = angle*M_PI/180;
 	std::vector<b2Shape*> shapes = shipPart->computeShapes(false, 0);
 	shipPart->initialize(shapes, fixDef, bodDef);
 	primeBody = shipPart->body;
@@ -64,16 +68,42 @@ void Ship::behavior(){
 			temp.y = holder*maxThrust;
 		}
 	}
-	primeBody->ApplyLinearImpulse(temp, b2Vec2(0,0), true);
+	primeBody->ApplyLinearImpulse(temp, primeBody->GetLocalCenter(), true);
+}
+static glm::vec3 randomDebrisPos(Ship& ship){
+    glm::vec3 debrisPos(ship.primeBody->GetWorldCenter().x, ship.primeBody->GetWorldCenter().y, 0);
+    debrisPos.x += ((float)(std::rand() % 1024) - 512)/8192 * ship.scale.x;
+    debrisPos.y += ((float)(std::rand() % 1024) - 512)/8192 * ship.scale.y;
+    return debrisPos;
 }
 void Ship::destructionEvent(){
-	
+    float debrisScale = scale.x * (bulletType + 1) / 4;
+    Debris* debris1 = new Debris(randomDebrisPos(*this), glm::vec3(0,0,1), (rand() % 360), glm::vec3(debrisScale));
+    debris1->initialize(2, b2Vec2(0,0));
+    Debris* debris2 = new Debris(randomDebrisPos(*this), glm::vec3(0,0,1), (rand() % 360), glm::vec3(debrisScale));
+    debris2->initialize(2, b2Vec2(0,0));
+    Debris* debris3 = new Debris(randomDebrisPos(*this), glm::vec3(0,0,1), (rand() % 360), glm::vec3(debrisScale));
+    debris3->initialize(2, b2Vec2(0,0));
+    Debris* canister1 = new Debris(randomDebrisPos(*this), glm::vec3(0,0,1), (rand() % 360), glm::vec3(debrisScale));
+    canister1->initialize(4, b2Vec2(0,0));
+    Debris* canister2 = new Debris(randomDebrisPos(*this), glm::vec3(0,0,1), (rand() % 360), glm::vec3(debrisScale));
+    canister2->initialize(4, b2Vec2(0,0));
+    gameMaster->addEntity(debris1);
+    gameMaster->addEntity(debris2);
+    gameMaster->addEntity(debris3);
+    gameMaster->addEntity(canister1);
+    gameMaster->addEntity(canister2);
 }
 void Ship::fire(){
-
+    glm::vec3 bulletPos(primeBody->GetWorldCenter().x, primeBody->GetWorldCenter().y, 0);
+    float bulletScale = scale.x * (bulletType + 1) / 4;
+    Bullet* newBullet = new Bullet(bulletPos, glm::vec3(0,0,1), angle, glm::vec3(bulletScale));
+    b2Vec2 bulletVelocity(cos(primeBody->GetAngle()), sin(primeBody->GetAngle()));
+    bulletVelocity *= 12;
+    bulletVelocity += primeBody->GetLinearVelocity();
+    newBullet->initialize(bulletType, bulletVelocity);
 }
 void Ship::startContact(Entity* other, float dmg){
-	other->applyDmg(dmg);
 	hp-=dmg;
 	m_contacting++;
 }

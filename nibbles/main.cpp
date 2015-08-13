@@ -42,7 +42,7 @@ int main( void )
     std::vector<Entity*> entities;
 
     Nibbler* nibbles = player;
-    Bullet* bullet = new Bullet(glm::vec3(3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
+    Bullet* bullet = new Bullet(glm::vec3(3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.125));
     Bullet* tearshot = new Bullet(glm::vec3(-3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
     Ship* fighter = new Ship(glm::vec3(-3,-3,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
     Ship* drone = new Ship(glm::vec3(3,-3,0), glm::vec3(0,0,1), 0, glm::vec3(0.2));

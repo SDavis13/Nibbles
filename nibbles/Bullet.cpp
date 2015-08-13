@@ -2,6 +2,8 @@
 #include "Mesh.hpp"
 #include "Part.hpp"
 #include "Nibbler.hpp"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 void Bullet::initialize(int type, b2Vec2 initialVelocity){
     std::string name = "";
@@ -31,6 +33,7 @@ void Bullet::initialize(int type, b2Vec2 initialVelocity){
     bodDef.fixedRotation = false;
 	bodDef.linearVelocity = initialVelocity;
 	bodDef.position = b2Vec2(position.x, position.y);
+    bodDef.angle = angle*M_PI/180;
     std::vector<b2Shape*> shapes = bulletPart->computeShapes(false, 0);
     bulletPart->initialize(shapes, fixDef, bodDef);
     primeBody = bulletPart->body;
@@ -43,7 +46,6 @@ void Bullet::destructionEvent(){
 	//pretty much nothing, shower of sparks?
 }
 void Bullet::startContact(Entity* other, float dmg){
-	other->applyDmg(dmg);
 	hp-=hp;
 	m_contacting++;
 }
