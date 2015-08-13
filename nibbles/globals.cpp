@@ -1,6 +1,8 @@
 #define GLOBALS_CPP
 
 #include <utility>
+#include <stdlib.h>
+#include <time.h>
 
 #include "globals.hpp"
 #include "Nibbler.hpp"
@@ -103,6 +105,8 @@ int initializeOGLstuff(){
     theLight = new Entity(glm::vec3(0,0,10), glm::vec3(0,0,1), 0, glm::vec3(1));
     light = new LightSource(*theLight, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(1), glm::vec3(0));
     light->lightColor = glm::vec3(0.75f, 0.1f, 1.0f);
+
+    srand(time(NULL));
 
     return 0;
 }
