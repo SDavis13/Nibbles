@@ -13,8 +13,10 @@
 
 #ifdef PART_CPP
 Entity defaultEntity;
+Mesh defaultMesh;
 #else
 extern Entity defaultEntity;
+extern Mesh defaultMesh;
 #endif
 
 class Part
@@ -26,7 +28,7 @@ public:
     float angle;
     glm::vec3 scale;
     float opacity;
-    Mesh mesh;
+    Mesh& mesh;
     bool valid;
     bool physValid;
     b2Body* body;
@@ -34,7 +36,7 @@ public:
             float relAngle = 0, glm::vec3 relScale = glm::vec3(1)) : 
                 whole(source), position(relPosition), rotationAxis(relRotAxis), angle(relAngle), 
                     scale(relScale), mesh(mesh), valid(true), physValid(false), opacity(1.0f) {source.addPart(this); }
-    Part() : whole(defaultEntity), valid(false), physValid(false) { printf("stuff"); }
+    Part() : whole(defaultEntity), mesh(defaultMesh), valid(false), physValid(false) { printf("stuff"); }
     ~Part() { if(physValid) universe->DestroyBody(body); }
     //Part(const Part& other) { printf("Copying Part"); }
     void render(glm::mat4& model) const;

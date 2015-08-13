@@ -6,11 +6,18 @@
 
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Dynamics/Joints/b2RopeJoint.h>
 
 void Nibbler::initialize(int type, b2Vec2 initialVelocity){
     Part* core = new Part(*this, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
     Part* corona = new Part(*this, meshes["nibblercorona"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3(MIN_SIZE));
+    //Part* core2 = new Part(*this, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3((float)MIN_SIZE*2/3));
+    //Part* corona2 = new Part(*this, meshes["nibblercorona"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3((float)MIN_SIZE*2/3));
+    //Part* core3 = new Part(*this, meshes["nibblercore"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3((float)MIN_SIZE/3));
+    //Part* corona3 = new Part(*this, meshes["nibblercorona"], glm::vec3(0), glm::vec3(0,0,1), 0, glm::vec3((float)MIN_SIZE/3));
     corona->opacity = 0.4;
+    //corona2->opacity = 0.4;
+    //corona3->opacity = 0.4;
     b2FixtureDef fixDef;
     fixDef.density = 10;
     b2BodyDef bodDef;
@@ -39,23 +46,26 @@ b2Vec2 Nibbler::getGravity(float objMass, b2Vec2 objLoc){
     return difference;
 }
 void Nibbler::behavior(){
-    unsigned int i = 0;
+    /*unsigned int i = 0;
     unsigned int listSize = parts.size();
     while(i < listSize){
         Part* curPart = parts[i];
-        glm::vec3& partPos = (curPart->position);
-        b2Body* curBody = curPart->body;
+        if(i > 1){
+            glm::vec3& partPos = (curPart->position);
+            if(i%2 == 0){
+                
+            }else{
+                partPos = parts[i-1]->position;
+            }
+        }
         if(!(curPart->physValid)){
             curPart->angle += 5.3;
             if(curPart->angle > 360){
                 curPart->angle -= 360;
             }
         }
-        if(i > 1){
-            b2Vec2 bodPos = curBody->GetPosition();
-        }
         ++i;
-    }
+    }*/
 }
 void Nibbler::applyThrust(b2Vec2 destination){
     float scalar = primeBody->GetMass()*5;
