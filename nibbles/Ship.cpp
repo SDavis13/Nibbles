@@ -17,7 +17,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
         fixDef.density = 5;
         fixDef.friction = 0.3;
         energy = 5;
-        maxThrust = 500*scale.x*scale.y;
+        maxThrust = 200*scale.x*scale.y;
         bulletType = BULLET;
         break;
     case DRONE:
@@ -50,24 +50,26 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
 void Ship::behavior(){
 	b2Vec2 temp = getWorldCenter()-player->getWorldCenter();
 	float distance = temp.Length();
+	float desiredAngle = (float)std::atan2(temp.x, temp.y);
 	temp.Normalize();
 	float field = FIELDSCALE*(player->getGravity(primeBody->GetMass(), temp)).Length();
 	if(distance < field){
 		//apply force in direction of nibbles
-		temp.x*=-maxThrust;
-		temp.y*=-maxThrust;
+		temp.x*=maxThrust;
+		temp.y*=maxThrust;
 	}
 	else{
-		if(distance > field *3){
+		if(distance > field +1){
 			//pick direction and apply force
-			temp.x*=maxThrust;
-			temp.y*=maxThrust;
+			temp.x*=-maxThrust;
+			temp.y*=-maxThrust;
 		}else{
 			float holder = temp.x;
-			temp.x = temp.y*maxThrust;
-			temp.y = holder*maxThrust;
+			temp.x = temp.y*maxThrust*2;
+			temp.y = holder*maxThrust*2;
 		}
 	}
+	primeBody->SetTransform( primeBody->GetPosition(), desiredAngle );
 	primeBody->ApplyLinearImpulse(temp, primeBody->GetLocalCenter(), true);
 }
 static glm::vec3 randomDebrisPos(Ship& ship){

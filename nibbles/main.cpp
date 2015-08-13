@@ -42,8 +42,8 @@ int main( void )
     Nibbler* nibbles = player;
     Bullet* bullet = new Bullet(glm::vec3(3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.125));
     Bullet* tearshot = new Bullet(glm::vec3(-3,3,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
-    Ship* fighter = new Ship(glm::vec3(-3,-3,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
-    Ship* drone = new Ship(glm::vec3(3,-3,0), glm::vec3(0,0,1), 0, glm::vec3(0.2));
+    Ship* fighter = new Ship(glm::vec3(-5,-5,0), glm::vec3(0,0,1), 0, glm::vec3(0.5));
+    Ship* drone = new Ship(glm::vec3(5,-5,0), glm::vec3(0,0,1), 0, glm::vec3(0.2));
     Debris* debris = new Debris(glm::vec3(0,-4,0), glm::vec3(0,0,1), 0, glm::vec3(0.4));
     Debris* canister = new Debris(glm::vec3(4,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
