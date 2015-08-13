@@ -47,13 +47,6 @@ int main( void )
     Debris* debris = new Debris(glm::vec3(0,-4,0), glm::vec3(0,0,1), 0, glm::vec3(0.4));
     Debris* canister = new Debris(glm::vec3(4,0,0), glm::vec3(0,0,1), 0, glm::vec3(0.1));
 
-    gameMaster->addEntity(bullet);
-    gameMaster->addEntity(tearshot);
-    gameMaster->addEntity(fighter);
-    gameMaster->addEntity(drone);
-    gameMaster->addEntity(debris);
-    gameMaster->addEntity(canister);
-
     nibbles->initialize(0, b2Vec2(0,0));
     bullet->initialize(0, b2Vec2(0,0));
     tearshot->initialize(1, b2Vec2(0,0));
@@ -61,6 +54,13 @@ int main( void )
     drone->initialize(1, b2Vec2(0,0));
     debris->initialize(2, b2Vec2(0,0));
     canister->initialize(4, b2Vec2(0,0));
+
+    gameMaster->addEntity(bullet);
+    gameMaster->addEntity(tearshot);
+    gameMaster->addEntity(fighter);
+    gameMaster->addEntity(drone);
+    gameMaster->addEntity(debris);
+    gameMaster->addEntity(canister);
 
 	// Load it into a VBO
 

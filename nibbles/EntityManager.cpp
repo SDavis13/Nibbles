@@ -25,14 +25,14 @@ void EntityManager::EndContact(b2Contact* contact)
 	Entity* tempB = (Entity*)contact->GetFixtureB()->GetBody()->GetUserData();
 	if(tempA->getHP() < 0){
 		if(tempA != (Entity*) player){
-		    deletionList.insert(tempA);
-            entityList.erase(tempA);
+		    deletionList.push_back(tempA);
+            entityList.remove(tempA);
         }
 	}
 	if(tempB->getHP() < 0){
         if(tempB != (Entity*) player){
-		    deletionList.insert(tempB);
-            entityList.erase(tempB);
+		    deletionList.push_back(tempB);
+            entityList.remove(tempB);
         }
 	}
 	std::cout << "end";
@@ -40,9 +40,9 @@ void EntityManager::EndContact(b2Contact* contact)
 
 void EntityManager::update(){
     if(!deletionList.empty()){
-        for (std::set<Entity*>::iterator it = deletionList.begin(); it != entityList.end(); ++it){
+        for (std::list<Entity*>::iterator it = deletionList.begin(); it != entityList.end(); ++it){
             Entity* item = *it;
-            entityList.erase(it);
+            entityList.remove(item);
             --it;
             item->destructionEvent();
             delete item;
@@ -55,7 +55,7 @@ void EntityManager::update(){
         }
         bodies = bodies->GetNext();
     }
-    for (std::set<Entity*>::iterator it = entityList.begin(); it != entityList.end(); ++it){
+    for (std::list<Entity*>::iterator it = entityList.begin(); it != entityList.end(); ++it){
         Entity* item = *it;
         item->update();
     }
@@ -64,7 +64,7 @@ void EntityManager::update(){
 
 void EntityManager::render(){
     background->render();
-    for (std::set<Entity*>::iterator it = entityList.begin(); it != entityList.end(); ++it){
+    for (std::list<Entity*>::iterator it = entityList.begin(); it != entityList.end(); ++it){
         Entity* item = *it;
         item->render();
     }
@@ -78,7 +78,7 @@ void EntityManager::createDroneSquad(int number){
 		Entity* temp;
 		temp = (Entity*)new Ship(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
 		temp->initialize(1, b2Vec2(0,0));
-		entityList.insert(temp);
+		entityList.push_back(temp);
 	}
 }
 
@@ -89,7 +89,7 @@ void EntityManager::createShipSquad(int number){
 		Entity* temp;
 		temp = (Entity*)new Ship(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
 		temp->initialize(0, b2Vec2(0,0));
-		entityList.insert(temp);
+		entityList.push_back(temp);
 	}
 }
 
@@ -100,12 +100,12 @@ void EntityManager::createAsteroids(int number){
 		Entity* temp;
 		temp = (Entity*)new Debris(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
 		temp->initialize((1+rand()%4), b2Vec2(0,0));
-		entityList.insert(temp);
+		entityList.push_back(temp);
 	}
 }
 
 void EntityManager::addEntity(Entity* entity){
-    entityList.insert(entity);
+    entityList.push_back(entity);
 }
 
 //not used for now
