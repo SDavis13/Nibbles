@@ -11,9 +11,7 @@
 class Bullet : public Entity
 {
 public:
-	float angle;
-	float maxThrust;
-	Bullet(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) //overriding scale
+	Bullet(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale)
             : Entity(position, rotationAxis, angle, scale) {}
     Bullet() : Entity() {}
     virtual void initialize(int type, b2Vec2 initialVelocity);

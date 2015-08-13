@@ -84,8 +84,8 @@ int initializeOGLstuff(){
     
     b2Vec2 uniGravity(0,0);
     universe = new b2World(uniGravity);
-	//gameMaster = new EntityManager;
-	//universe->SetContactListener(gameMaster);
+	gameMaster = new EntityManager;
+	universe->SetContactListener(gameMaster);
 
     meshes.insert(std::pair<std::string,Mesh>("nibblercore", Mesh("nibblercore.obj")));
     meshes.insert(std::pair<std::string,Mesh>("nibblercorona", Mesh("nibblercorona.obj")));
