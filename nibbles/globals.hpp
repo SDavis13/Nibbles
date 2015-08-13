@@ -87,7 +87,7 @@ COMPILE_HERE GLuint elementbuffer;
 COMPILE_HERE GLuint Texture;
 COMPILE_HERE GLuint TextureID;
 
-COMPILE_HERE EntityManager* ContactListenerInstance;
+COMPILE_HERE EntityManager* gameMaster;
 
 COMPILE_HERE std::map<std::string, Mesh> meshes;
 

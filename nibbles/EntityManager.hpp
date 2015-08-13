@@ -9,9 +9,12 @@
 #include "Debris.hpp"
 #include "Bullet.hpp"
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
+#include <set>
 
 class EntityManager : public b2ContactListener
 {
+    std::set<Entity*> entityList;
+    std::set<Entity*> deletionList;
 
 	//b2ContactListener
     // Called when two fixtures begin to touch

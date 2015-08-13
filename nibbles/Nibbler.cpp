@@ -32,7 +32,7 @@ void Nibbler::initialize(int type, b2Vec2 initialVelocity){
     primeBody = core->body;
 	primeBody->SetUserData((Entity*) this);
     mass = primeBody->GetMass();
-	hp = 10.0f;
+	hp = 5000.0f;
     energy = MIN_SIZE;
     physValid = true;
 	m_contacting = 0;
