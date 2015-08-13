@@ -23,6 +23,14 @@ class EntityManager : public b2ContactListener
     // Called when two fixtures cease to touch
     virtual void EndContact(b2Contact* contact);
 
+    void addEntity(Entity* newEntity);//make sure entity added with this is initialized!
+    void update();
+    void render();
+
+    void createDroneSquad(int number);//creates drones in random locations
+    void createShipSquad(int number);//creates ships in random locations
+    void createAsteroids(int number);//creates asteroids in random locations
+
 	//request for new entities
 	void newEntity(int type, glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale, b2Vec2 velocity);
 private:

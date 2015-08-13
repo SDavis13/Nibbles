@@ -164,14 +164,10 @@ int main( void )
 
         b2Body* bodies = universe->GetBodyList();
         while(bodies != NULL){
-			//Entity* temp = (Entity*)bodies->GetUserData();
             if(bodies != player->primeBody){
                 bodies->ApplyForceToCenter( ( player->getGravity(bodies->GetMass(), bodies->GetPosition()) ), true);
             }
             bodies = bodies->GetNext();
-			//if(temp->getHP() < 0){
-				//temp->destructionEvent();
-			//}
         }
 
         if(framenumber%1024 == 0){

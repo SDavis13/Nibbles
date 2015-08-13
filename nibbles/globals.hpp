@@ -52,7 +52,6 @@ COMPILE_HERE Nibbler* player;
 COMPILE_HERE Entity* background;
 COMPILE_HERE Entity* theLight;
 COMPILE_HERE LightSource* light;
-COMPILE_HERE std::list<Entity*> characters;
 
 COMPILE_HERE std::vector<unsigned short> indices;
 COMPILE_HERE std::vector<glm::vec3> indexed_vertices;
