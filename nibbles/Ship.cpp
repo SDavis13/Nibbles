@@ -18,7 +18,7 @@ void Ship::initialize(int type, b2Vec2 initialVelocity){
         fixDef.density = 5;
         fixDef.friction = 0.3;
         energy = 5;
-        maxThrust = 50*scale.x*scale.y;
+        maxThrust = 25*scale.x*scale.y;
         bulletType = BULLET;
         break;
     case DRONE:
