@@ -14,6 +14,7 @@ public:
 	float speed;
 	float maxThrust;
     int bulletType;
+	int tick;
     Ship(glm::vec3 position, glm::vec3 rotationAxis, float angle, glm::vec3 scale) 
             : Entity(position, rotationAxis, angle, scale), speed(0), maxThrust(1), bulletType(0) {}
     Ship() : Entity() {}

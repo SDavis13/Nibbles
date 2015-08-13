@@ -52,22 +52,17 @@ void Ship::behavior(){
 	float distance = temp.Length();
 	float desiredAngle = (float)std::atan2(temp.x, temp.y);
 	temp.Normalize();
-	float field = FIELDSCALE*(player->getGravity(primeBody->GetMass(), temp)).Length();
+	float field = FIELDSCALE;
+		field*= (player->getGravity(primeBody->GetMass(), temp)).Length();
 	if(distance < field){
 		//apply force in direction of nibbles
 		temp.x*=maxThrust;
 		temp.y*=maxThrust;
-	}
-	else{
-		if(distance > field +1){
-			//pick direction and apply force
-			temp.x*=-maxThrust;
-			temp.y*=-maxThrust;
-		}else{
+	}else{
+			float desiredAngle = (float)std::atan2(temp.y, temp.x);
 			float holder = temp.x;
-			temp.x = temp.y*maxThrust*2;
-			temp.y = holder*maxThrust*2;
-		}
+			temp.x = temp.y*maxThrust;
+			temp.y = holder*maxThrust;		
 	}
 	primeBody->SetTransform( primeBody->GetPosition(), desiredAngle );
 	primeBody->ApplyLinearImpulse(temp, primeBody->GetLocalCenter(), true);
