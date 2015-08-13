@@ -97,11 +97,12 @@ void EntityManager::createShipSquad(int number){
 }
 
 void EntityManager::createAsteroids(int number){
-	int areana = (int)meshes["background"].getRadius()/2;
+	int arena = (int)meshes["background"].getRadius()/2;
+	arena *= background->scale.x;
 	for(int i = 0; i < number; i++){
 		int size = 1+rand()%(int)(player->energy+3);
 		Entity* temp;
-		temp = (Entity*)new Debris(glm::vec3((std::rand()%areana), (std::rand()%areana), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
+		temp = (Entity*)new Debris(glm::vec3((std::rand()%arena), (std::rand()%arena), 0), glm::vec3(0, 0, 1), 0, glm::vec3(size, size, size));
 		temp->initialize((1+rand()%4), b2Vec2(0,0));
 		entityList.insert(temp);
 	}
